@@ -14,7 +14,7 @@ function PrivateRoute({ component: Component, ...rest }) {
             <Redirect to="/verifyaccount" />
           )
         ) : (
-          <Redirect to="/" />
+          <Redirect to="/admin" />
         );
       }}
     />

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
-import { validateEmail } from "../utils";
-import { login } from "../db";
+import { validateEmail } from "../../utils/validateEmail";
 
 function Login() {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
 
@@ -35,7 +36,7 @@ function Login() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1 className="heading mb-1">Login below</h1>
+      <h1 className="heading mb-1">Login</h1>
       <div className="input">
         <label>Email</label>
         <input
