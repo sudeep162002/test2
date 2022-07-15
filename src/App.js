@@ -9,6 +9,7 @@ import SignUp from "./pages/admin/SignUp";
 import Home from "./pages/Home";
 import FreeRoute from "./utils/FreeRoute";
 import PrivateRoute from "./utils/PrivateRoute";
+import Footer from "./components/Footer"
 function App() {
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
           </Switch>
         </AuthProvider>
       </Router>
+      <Footer/>
     </>
   );
 }
