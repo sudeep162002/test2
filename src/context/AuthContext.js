@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
-import app, { db } from "../utils/firebase";
+import app from "../utils/firebase";
 import { doc, getDoc } from "@firebase/firestore";
 import {
   createUserWithEmailAndPassword,
