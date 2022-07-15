@@ -11,7 +11,7 @@ function PrivateRoute({ component: Component, ...rest }) {
           currentUser.emailVerified ? (
             <Component {...props} />
           ) : (
-            <Redirect to="/verifyaccount" />
+            <Redirect to="/admin" />
           )
         ) : (
           <Redirect to="/admin" />
