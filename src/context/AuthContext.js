@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import app from "../utils/firebase";
-import { doc, getDoc } from "@firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -22,7 +21,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-  const [admin, setAdmin] = useState(false);
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
@@ -32,11 +30,13 @@ export function AuthProvider({ children }) {
       async (userCred) => {
         const user = userCred.user;
         if (user) {
-          console.log("USER CREATED!!!");
+          await updateProfile(user, { displayName: name });
+          console.log(user);
         }
       }
     );
   }
+
   function logout() {
     return signOut(auth);
   }
@@ -62,7 +62,6 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
-    admin,
     signup,
     login,
     logout,

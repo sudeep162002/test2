@@ -15,7 +15,7 @@ function Forms() {
     const fetchData = async () => {
       try {
         // get all the forms for this user id
-        let forms = await getForms(currentUser.id)
+        let forms = await getForms("OK")
 
         setForms(forms)
         setLoading(false)

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
+import Header from "./components/Header";
 import { AuthProvider } from "./context/AuthContext";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import FormAnalytics from "./pages/admin/FormAnalytics";
@@ -15,17 +16,18 @@ function App() {
     <>
       <Router>
         <AuthProvider>
+          <Header />
           <Switch>
             <FreeRoute exact path="/" component={Home} />
             <FreeRoute path="/login" component={Login} />
             <FreeRoute path="/signup" component={SignUp} />
             <FreeRoute path="/admin" component={FormSettings} />
-            <FreeRoute
+            <PrivateRoute
               exact
               path="/admin/:formId/analytics"
               component={FormAnalytics}
             />
-            <FreeRoute
+            <PrivateRoute
               path="/admin/:formId/settings"
               component={FormSettings}
             />
