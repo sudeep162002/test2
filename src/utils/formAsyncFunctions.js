@@ -1,19 +1,18 @@
+import { doc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { firestore, storage } from "./firebase";
-
+import { collection, query, where, getDocs } from "firebase/firestore";
 export const createForm = (formModel) => {
   // return firestore.collection("forms").add({...formModel, uid: uid})
 };
 
 export const getForms = async (id) => {
-  let docs = await firestore.collection("forms").get({
-    uid: "n8v5fe1ioq8DrhSNnDKk",
-  });
-  console.log(docs);
-  docs = docs.docs;
-  let forms = docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-  return forms;
+    const q = query(collection(firestore, "admin/n8v5fe1ioq8DrhSNnDKk"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data());
+    });
 };
 
 export const getForm = async (ops) => {
