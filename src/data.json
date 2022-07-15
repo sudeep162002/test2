@@ -1,0 +1,69 @@
+{
+  "admin": {
+    "adminId": {
+      "formID": {
+        "createdAt": "time",
+        "endmessage": "",
+        "questions": [
+          {
+            "id": 1,
+            "required": true,
+            "title": "Capital of India?",
+            "type": "moma, mosa, momaf, mosaf",
+            "options": [
+              { "id": 1, "content": "Delhi" },
+              { "id": 2, "content": "Bombay" },
+              { "id": 3, "content": "Kolkata" },
+              { "id": 4, "content": "Dehradun" }
+            ],
+            "correctAnswer": [1],
+            "postiveMarks": 4,
+            "negativeMarks": 1
+          }
+        ]
+      },
+      "formID2": {
+        "createdAt": "time",
+        "endmessage": "",
+        "questions": [
+          {
+            "id": 1,
+            "required": true,
+            "title": "Capital of India?",
+            "type": "moma, mosa, momaf, mosaf",
+            "options": [
+              { "id": 1, "content": "Delhi" },
+              { "id": 2, "content": "Bombay" },
+              { "id": 3, "content": "Kolkata" },
+              { "id": 4, "content": "Dehradun" }
+            ],
+            "correctAnswer": [1],
+            "postiveMarks": 4,
+            "negativeMarks": 1
+          }
+        ]
+      },
+      "formID3": {
+        "createdAt": "time",
+        "endmessage": "",
+        "questions": [
+          {
+            "id": 1,
+            "required": true,
+            "title": "Capital of India?",
+            "type": "moma, mosa, momaf, mosaf",
+            "options": [
+              { "id": 1, "content": "Delhi" },
+              { "id": 2, "content": "Bombay" },
+              { "id": 3, "content": "Kolkata" },
+              { "id": 4, "content": "Dehradun" }
+            ],
+            "correctAnswer": [1],
+            "postiveMarks": 4,
+            "negativeMarks": 1
+          }
+        ]
+      }
+    }
+  }
+}
