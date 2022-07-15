@@ -19,13 +19,13 @@ function App() {
             <FreeRoute exact path="/" component={Home} />
             <FreeRoute path="/login" component={Login} />
             <FreeRoute path="/signup" component={SignUp} />
-            <PrivateRoute path="/admin" component={AdminDashboard} />
-            <PrivateRoute
+            <FreeRoute path="/admin" component={FormSettings} />
+            <FreeRoute
               exact
               path="/admin/:formId/analytics"
               component={FormAnalytics}
             />
-            <PrivateRoute
+            <FreeRoute
               path="/admin/:formId/settings"
               component={FormSettings}
             />
