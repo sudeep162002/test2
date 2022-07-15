@@ -14,6 +14,7 @@ function Signup() {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Handle Signup
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
