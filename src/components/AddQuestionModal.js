@@ -7,9 +7,14 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {
+    Checkbox,
   FormControl,
+  FormControlLabel,
+  FormGroup,
   InputLabel,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
   TextField,
 } from "@mui/material";
@@ -21,10 +26,12 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
+  maxHeight: 600,
+  bgcolor: "var(--main-black)",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  overflowY: "scroll",
 };
 
 function AddQuestionModal(props) {
@@ -32,6 +39,12 @@ function AddQuestionModal(props) {
   const [type, setType] = useState();
   const [title, setTitle] = useState("");
   const [options, setOptions] = useState([]);
+  const [option, setOption] = useState("");
+  const addOption = () => {
+    setOptions((prev) => [...prev, { id: prev.length + 1, content: option }]);
+    setOption("");
+    console.log(options);
+  };
   return (
     <ThemeWrapper>
       <Modal open={open} onClose={handleClose}>
@@ -68,12 +81,40 @@ function AddQuestionModal(props) {
             </FormControl>
             {options.length && (
               <FormControl fullWidth>
-                {options.map((option) => (type === "mosa" ? "" : ""))}
+                {type === "mosa" ? (
+                  <RadioGroup name="radio-buttons-group" defaultValue={null}>
+                    {options.map((option) => (
+                      <FormControlLabel
+                        value={option.content}
+                        control={<Radio />}
+                        label={option.content}
+                      />
+                    ))}
+                  </RadioGroup>
+                ) : type === "moma" ? (
+                  <FormGroup>
+                    {options.map((option) => (
+                      <FormControlLabel
+                        value={option.content}
+                        control={<Checkbox />}
+                        label={option.content}
+                      />
+                    ))}
+                  </FormGroup>
+                ) : (
+                  ""
+                )}
               </FormControl>
             )}
             <FormControl fullWidth sx={{ my: 2 }}>
-              <TextField label="Option" />
-              <button className="btn">Add Option</button>
+              <TextField
+                label="Option"
+                value={option}
+                onChange={(e) => setOption(e.target.value)}
+              />
+              <button className="btn" onClick={addOption}>
+                Add Option
+              </button>
             </FormControl>
           </Box>
         </Fade>

@@ -1,8 +1,25 @@
 import { firestore, storage } from "./firebase";
-import { collection, query, getDocs, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  doc,
+  deleteDoc,
+  getDoc,
+  setDoc,
+  addDoc,
+} from "firebase/firestore";
 
 export const createForm = (formModel) => {
   // return firestore.collection("forms").add({...formModel, uid: uid})
+
+  const cityRef = collection(
+    firestore,
+    "admin",
+    "n8v5fe1ioq8DrhSNnDKk",
+    "forms"
+  );
+  return addDoc(cityRef, formModel);
 };
 
 export const getForms = async (id) => {
@@ -17,11 +34,28 @@ export const getForms = async (id) => {
   return data;
 };
 
-export const getForm = async (ops) => {
-  let docs = await firestore.collection("forms").get(ops);
-  let doc = docs.docs[0];
-  doc = { ...doc.data(), id: doc.id };
-  return doc;
+export const getForm = async (adminId, id) => {
+  // let docs = await firestore.collection("forms").get(ops);
+  // let doc = docs.docs[0];
+  // doc = { ...doc.data(), id: doc.id };
+  // return doc;
+
+  const docRef = doc(
+    firestore,
+    "admin",
+    "n8v5fe1ioq8DrhSNnDKk",
+    "forms",
+    "Qx7drpo6vwxEC5COYf6V"
+  );
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  return docSnap.data();
 };
 
 export const deleteForm = async (formId) => {
@@ -42,11 +76,20 @@ export const uploadFile = (file, fileName) => {
   return ref.put(file);
 };
 
-export const submitForm = (submission, formId) =>
-  firestore.collection("submissions").add({
-    submission,
-    formId,
-  });
+export const submitForm = async (submission, formId) => {
+  // firestore.collection("submissions").add({
+  //   submission,
+  //   formId,
+  // });
+  await setDoc(
+    doc(firestore, "admin", "n8v5fe1ioq8DrhSNnDKk", "submissions", ""),
+    {
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA",
+    }
+  );
+};
 
 export const getSubmissions = async (opts) => {
   let docs = await firestore.collection("submissions").get(opts);

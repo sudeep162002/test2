@@ -1,76 +1,161 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { useHistory } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-
-import { validateEmail } from "../../utils/validateEmail";
-
-function Login() {
-  const { login } = useAuth();
-  const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
-
-  const [err, setErr] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (loading) return;
-    setErr("");
-
-    if (!email.trim()) return setErr("Email is required");
-    if (!validateEmail(email)) return setErr("Email is not valid");
-
-    if (!pwd.trim()) return setErr("Password is required");
-    if (pwd.trim().length < 6 || pwd.trim().length > 20)
-      return setErr("Password should be 6 - 20 characters long");
-
-    setLoading(true);
-
-    try {
-      await login(email, pwd);
-    } catch (e) {
-      setLoading(false);
-
-      console.log(e.code);
-      if (e.code === "auth/wrong-password")
-        setErr("Please enter correct password!!");
-      else if (e.code === "auth/user-not-found")
-        setErr(
-          "User with this email is not found. Please enter correct email!!"
-        );
-      else if (e.code === "auth/network-request-failed")
-        setErr("You are not connected to internet!!");
-    }
-  };
-
+import { Alert } from "@mui/material";
+import ThemeWrapper from "../../utils/styleUtils";
+function Copyright(props) {
   return (
-    <form onSubmit={handleSubmit}>
-      <h1 className="heading mb-1">Login</h1>
-      <div className="input">
-        <label>Email</label>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="input">
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="Enter your password"
-          onChange={(e) => setPwd(e.target.value)}
-        />
-      </div>
-      {err && <p className="err mb-1">{err}</p>}
-      <Link to="/signup" className="alt">
-        don't have an account?
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="#">
+        Quizard
       </Link>
-      <button className="btn" type="submit">
-        {loading ? <span className="spinner white"></span> : <span>login</span>}
-      </button>
-    </form>
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
   );
 }
 
-export default Login;
+export default function Login() {
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("");
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login } = useAuth();
+  const history = useHistory();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+    setSeverity("");
+    if (
+      !(
+        emailRef.current.reportValidity() &&
+        passwordRef.current.reportValidity()
+      )
+    ) {
+      setLoading(false);
+      return;
+    }
+    await login(emailRef.current.value, passwordRef.current.value)
+      .then(() => {
+        history.push("/");
+      })
+      .catch((err) => {
+        setSeverity("error");
+        if (err.code === "auth/user-not-found") {
+          setMessage(
+            "You are not registered with us. Please Sign Up and Log in again."
+          );
+        } else if (err.code === "auth/wrong-password") {
+          setMessage("Incorrect Password");
+        } else if (err.code === "auth/network-request-failed") {
+          setMessage("Failed to connect to internet");
+        } else if (err.code === "auth/timeout") {
+          setMessage("Connection Timeout");
+        } else {
+          setMessage("Sorry. It didn't work.");
+        }
+        setLoading(false);
+      });
+  };
+
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <ThemeWrapper>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            {message && <Alert severity={severity}>{message}</Alert>}
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                required
+                margin="normal"
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                inputRef={emailRef}
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                required
+                margin="normal"
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                inputRef={passwordRef}
+                autoComplete="current-password"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                disabled={loading}
+                sx={{ mt: 3, mb: 2 }}
+              >
+                {loading ? "Signing In..." : "Sign In"}
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="/forgotpassword" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+          <Copyright sx={{ mt: 8, mb: 4 }} />
+        </Container>
+      </ThemeWrapper>
+    </div>
+  );
+}

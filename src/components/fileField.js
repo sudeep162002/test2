@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { uploadFile } from "../db"
+import { uploadFile } from "../utils/formAsyncFunctions"
 
 function FileField({ fieldModel, onCompleted }){
     const [selectedFileName, setSelectedFileName] = useState("")

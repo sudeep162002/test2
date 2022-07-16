@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { getForms } from "../../utils/formAsyncFunctions";
 import FormCard from "../../components/FormCard";
 
-function Forms() {
+function FormSettings() {
   const [forms, setForms] = useState([]);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,9 @@ function Forms() {
 
   return (
     <div>
-      <h1 className="heading primary-color"><span>  My Quizzes</span></h1>
+      <h1 className="heading primary-color">
+        <span> My Quizzes</span>
+      </h1>
       {loading ? (
         <p className="text-center mt-1">
           <span className="spinner"></span>

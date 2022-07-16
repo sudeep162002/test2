@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import { AuthProvider } from "./context/AuthContext";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -11,7 +11,8 @@ import Home from "./pages/Home";
 import FreeRoute from "./utils/FreeRoute";
 import PrivateRoute from "./utils/PrivateRoute";
 import Footer from "./components/Footer";
-import CreateForm from "./pages/admin/CreateForm";
+import Create from "./pages/admin/create";
+import Fill from "./pages/admin/Fill";
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
         <AuthProvider>
           <Header />
           <Switch>
+            <Route path="/fill/:adminId/:id" component={Fill} />
             <FreeRoute exact path="/" component={Home} />
             <FreeRoute path="/login" component={Login} />
             <FreeRoute path="/signup" component={SignUp} />
@@ -31,7 +33,7 @@ function App() {
               path="/admin/:formId/settings"
               component={FormSettings}
             />
-            <PrivateRoute path="/create" component={CreateForm} />
+            <PrivateRoute path="/create" component={Create} />
           </Switch>
         </AuthProvider>
       </Router>
