@@ -5,7 +5,9 @@ import { useState, createRef } from "react";
 function AddMultiOptionField({ inputType, add, close }) {
   const [err, setErr] = useState("");
   const [opterr, setOpterr] = useState("");
-
+   const [correctAns,setCorrectAns]=useState(0);
+   const [positiveMarks,setPositiveMarks]=useState(0);
+   const [negativeMarks,setNegativeMarks]=useState(0);
   const [title, setTitle] = useState("");
   const [required, setRequired] = useState(false);
   const inputRef = createRef();
@@ -22,6 +24,9 @@ function AddMultiOptionField({ inputType, add, close }) {
       required,
       options,
       type: inputType,
+      correctAns,
+      positiveMarks,
+      negativeMarks
     });
     close();
   };
@@ -84,6 +89,19 @@ function AddMultiOptionField({ inputType, add, close }) {
       <div className="input inline">
         <label>Required: </label>
         <input type="checkbox" onChange={() => setRequired(!required)} />
+      </div>
+      {/* yaha mera code hai */}
+      <div className="input inline">
+        <label>Correct Ans: </label>
+        <input type="number" value={correctAns} onChange={(e) => setCorrectAns(e.target.value)} />
+      </div>
+      <div className="input inline">
+        <label> Positive Marks: </label>
+        <input type="number" value={positiveMarks} onChange={(e) => setPositiveMarks(e.target.value)} />
+      </div>
+      <div className="input inline">
+        <label>Correct Ans: </label>
+        <input type="number" value={negativeMarks} onChange={(e) => setNegativeMarks(e.target.value)} />
       </div>
       {err && <p className="err mb-1">{err}</p>}
       <button className="btn" onClick={addField}>

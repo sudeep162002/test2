@@ -69,8 +69,9 @@ export const uploadFile = (file, fileName) => {
 export const submitForm = async (submission, adminId, formId) => {
   console.log("ye naya hai")
   console.log(submission);
+  let allAnswers={...submission}
   const cityRef = collection(firestore,"submissions");
-  return addDoc(cityRef, submission[0]);
+  return addDoc(cityRef, allAnswers);
 };
 
 export const getSubmissions = async (opts) => {
@@ -92,8 +93,6 @@ let data=[];
 let count=0;
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
-  count++;
-  console.log(count);
   data.push(doc.data());
   // console.log(doc.id, " => ", doc.data());
 });
@@ -106,6 +105,15 @@ export const getStatisticalData=(formData)=>{
   //   // doc.data() is never undefined for query doc snapshots
   //   // console.log(doc.id, " => ", doc.data());
   // });
-  console.log(formData)
+  // console.log(formData)
   return 0;
+}
+
+export const getTotalMarks=(formData)=>{
+  let marksArray=[];
+  // formData.forEach((user)=>{
+  //   let marks=0;
+  //   user.questions
+  // })
+  console.log(formData)
 }

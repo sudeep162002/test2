@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { useParams } from "react-router-dom";
-import { getFormData,getStatisticalData } from "../../utils/formAsyncFunctions";
+import { getFormData,getStatisticalData,getTotalMarks } from "../../utils/formAsyncFunctions";
 
 
 function FormAnalytics() {
@@ -15,9 +15,7 @@ function FormAnalytics() {
         let formData = await getFormData(formId,adminId);
        
         setFormData(formData);
-        // console.log("vfjfjgfefefhergtuhg")
         getStatisticalData(formData);
-        // console.log(formData);
         setLoading(false);
       } catch (e) {
         setLoading(false);
@@ -30,7 +28,13 @@ function FormAnalytics() {
 
   return (
     <div style={{backgroundColor:"blue"}}>
-      {formData?<h1>{formData.length}</h1>:""}
+      <div>
+      <h3>Total Submissions</h3>
+      {formData?<h1>{formData.length}</h1>:0}
+      </div>
+      <div>
+
+      </div>
       FormAnalytics</div>
   )
 }
