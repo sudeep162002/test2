@@ -1,3 +1,5 @@
+import React from "react";
+
 export const updateObjState = (setter, model, prop, val) => {
   let _model = Object.assign({}, model);
   _model[prop] = val;
@@ -44,7 +46,7 @@ export const createFillableModel = (model) => {
 
   for (let question in questions) {
     let fld = questions[question];
-    console.log(fld);
+    // console.log(fld);
     // let fieldModel = {
     //     title: fld.title,
     //     required: fld.required,
@@ -57,23 +59,26 @@ export const createFillableModel = (model) => {
       value: fld.type === "mosa" || fld.type === "moma" ? [] : "",
     });
   }
-  console.log(fillableModel);
+  // console.log(fillableModel);
   return fillableModel;
 };
 
-export const createSubmitableModel = (fields) => {
+export const createSubmitableModel = (questions,userName,adminId,formId) => {
   let submitableModel = [];
-  for (let field in fields) {
-    let fld = fields[field];
-
+  console.log(questions);
+  for (let question in questions) {
+    let fld = questions[question];
+     fld.userName=userName
+     fld.adminId=adminId
+     fld.formId=formId
     if (!fld.value || fld.value.length < 1) continue;
 
-    let fieldModel = {
-      title: fld.title,
-      value: fld.value,
-      type: fld.type,
-    };
-    submitableModel.push(fieldModel);
+    // let fieldModel = {
+    //   title: fld.title,
+    //   value: fld.value,
+    //   type: fld.type,
+    // };
+    submitableModel.push(fld);
   }
   return submitableModel;
 };

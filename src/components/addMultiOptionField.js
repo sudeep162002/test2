@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useState, createRef } from "react";
 
 function AddMultiOptionField({ inputType, add, close }) {

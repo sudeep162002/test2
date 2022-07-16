@@ -20,15 +20,16 @@ function App() {
         <AuthProvider>
           <Header />
           <Switch>
+            {/* <Route path="/submissions/:formId"  component={FormAnalytics}/> */}
+            <Route
+              path="/admin/:adminId/form/:formId"
+              component={FormAnalytics}
+            />
             <Route path="/fill/:adminId/:id" component={Fill} />
             <FreeRoute exact path="/" component={Home} />
             <FreeRoute path="/login" component={Login} />
             <FreeRoute path="/signup" component={SignUp} />
             <PrivateRoute path="/admin" component={AdminDashboard} />
-            <PrivateRoute
-              path="/admin/:formId/analytics"
-              component={FormAnalytics}
-            />
             <PrivateRoute
               path="/admin/:formId/settings"
               component={FormSettings}

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useState } from 'react'
 import { arrayToggle } from '../utils'
 function AddFileField({inputType, add, close}){

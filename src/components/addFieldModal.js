@@ -1,3 +1,5 @@
+import React from "react";
+
 import AddTextField from "./AddTextField";
 import AddMultiOptionField from "./AddMultiOptionField";
 import AddFileField from "./AddFileField";

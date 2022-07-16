@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
@@ -10,7 +12,7 @@ import { expired } from "../../utils";
 
 function Fill() {
   const { adminId, id } = useParams();
-  console.log(adminId);
+  // console.log(adminId);
   const [form, setForm] = useState(null);
   const [msg, setMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -21,6 +23,7 @@ function Fill() {
     const fetchData = async () => {
       try {
         let frm = await getForm(adminId, id);
+        frm.formId=id
         setForm(frm);
         setLoading(false);
       } catch (e) {
@@ -52,6 +55,7 @@ function Fill() {
         ) : (
           <RenderReactiveForm
             model={form}
+            // formId={id}
             onSubmitted={() => setSubmitted(true)}
           />
         )

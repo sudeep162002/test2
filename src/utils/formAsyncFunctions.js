@@ -1,6 +1,8 @@
+import React from "react";
 import { firestore, storage } from "./firebase";
 import {
   collection,
+  where,
   query,
   getDocs,
   doc,
@@ -12,7 +14,6 @@ import {
 
 export const createForm = (adminId, formModel) => {
   // return firestore.collection("forms").add({...formModel, uid: uid})
-
   const cityRef = collection(firestore, "admin", adminId, "forms");
   return addDoc(cityRef, formModel);
 };
@@ -66,14 +67,10 @@ export const uploadFile = (file, fileName) => {
 };
 
 export const submitForm = async (submission, adminId, formId) => {
-  // firestore.collection("submissions").add({
-  //   submission,
-  //   formId,
-  // });
-  await setDoc(
-    doc(firestore, "admin", adminId, "submissions", formId),
-    submission
-  );
+  console.log("ye naya hai")
+  console.log(submission);
+  const cityRef = collection(firestore,"submissions");
+  return addDoc(cityRef, submission[0]);
 };
 
 export const getSubmissions = async (opts) => {
@@ -83,3 +80,32 @@ export const getSubmissions = async (opts) => {
   console.log(submissions);
   return submissions;
 };
+
+
+// function to get form data for analytics
+export const getFormData=async (formId,adminId)=>{ 
+  // ek form ka saara data aa jaega isse
+const q = query(collection(firestore, "submissions"), where("formId", "==", formId),where("adminId","==",adminId));
+const querySnapshot = await getDocs(q);
+// console.log(querySnapshot)
+let data=[];
+let count=0;
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  count++;
+  console.log(count);
+  data.push(doc.data());
+  // console.log(doc.id, " => ", doc.data());
+});
+
+  return data;
+}
+
+export const getStatisticalData=(formData)=>{
+  // formData.forEach((doc) => {
+  //   // doc.data() is never undefined for query doc snapshots
+  //   // console.log(doc.id, " => ", doc.data());
+  // });
+  console.log(formData)
+  return 0;
+}

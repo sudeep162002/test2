@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 
@@ -18,7 +19,7 @@ function FormSettings() {
         let forms = await getForms("OK");
 
         setForms(forms);
-        console.log(forms);
+        // console.log(forms);
         setLoading(false);
       } catch (e) {
         setLoading(false);

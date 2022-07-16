@@ -1,9 +1,11 @@
+import React from "react";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 import { getDateFromMillis } from "../utils";
-import { deleteForm } from "../utils/formAsyncFunctions";
+import { deleteForm, getFormData } from "../utils/formAsyncFunctions";
 
 import RenderPlainForm from "./RenderPlainForm";
 
@@ -11,6 +13,10 @@ function FormCard({ form, onDelete }) {
   const [preview, setPreview] = useState(false);
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
+  // const handleClick=()=>{
+  //   getFormData(form,currentUser.uid);
+  //   console.log("Rutsssss");
+  // }
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this form?")) return;
     setLoading(true);
@@ -29,7 +35,9 @@ function FormCard({ form, onDelete }) {
         <span className="nav-item" onClick={() => setPreview(true)}>
           preview
         </span>
-        <Link to={"/submissions/" + form.id} className="nav-item">
+        <Link to={`/admin/${currentUser.uid}/form/${form.id}`} className="nav-item" 
+        // onClick={handleClick}
+        >
           submissions
         </Link>
         <span className="nav-item" onClick={handleDelete}>
