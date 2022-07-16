@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-size: 1rem;
 }
 a {
@@ -16,6 +16,8 @@ a {
 }
 
 .btn {
+  margin:20px;
+  margin-top:160px;
   border: none;
   outline: none;
   padding: 1em 2em;
@@ -32,8 +34,8 @@ label.btn {
   display: inline-block;
   width: fit-content;
   max-width: auto;
-  padding: 0.5em 1em;
-  font-size: 0.9em;
+  padding: .5em 1em;
+  font-size: .9em;
   font-weight: normal;
 }
 .btn:hover {
@@ -114,8 +116,7 @@ label.btn {
   font-weight: bold;
   font-size: 1.2em;
 }
-.navbar .nav span a,
-.navbar .nav span span {
+.navbar .nav span a, .navbar .nav span span {
   color: #fff;
   margin: 0 2vw;
   opacity: 0.9;
@@ -124,26 +125,17 @@ label.btn {
   font-size: 0.8em;
   cursor: pointer;
 }
-.navbar .nav a:hover,
-.navbar .nav span:hover {
+.navbar .nav a:hover, .navbar .nav span:hover {
   opacity: 1;
 }
 
 .section {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   margin-bottom: 3em;
 }
-.section img,
-.section .content {
+.section img, .section .content {
   width: 100%;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
 }
 .section h1 {
   font-size: 3em;
@@ -163,7 +155,7 @@ label.btn {
   margin-bottom: 1vw;
 }
 .section a {
-  font-size: 0.8em;
+  font-size: 1.0em;
 }
 
 .form {
@@ -185,17 +177,14 @@ label.btn {
 .input {
   margin-bottom: 1.5em;
 }
-.input label,
-.input input,
-.input textarea {
+.input label, .input input, .input textarea {
   display: block;
 }
 .input label {
   font-weight: bold;
   margin-bottom: 3px;
 }
-.input input,
-.input textarea {
+.input input, .input textarea {
   outline: none;
   width: 100%;
   max-width: 350px;
@@ -213,8 +202,7 @@ label.btn {
 .input.inline label {
   margin-right: 1em;
 }
-.input.inline label,
-.input.inline input {
+.input.inline label, .input.inline input {
   display: inline;
   width: auto;
 }
@@ -233,10 +221,10 @@ input.file {
   margin-top: 2em;
   display: grid;
   gap: 1em;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat( auto-fill, minmax(300px, 1fr) );
 }
 .cards-container.submissions {
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat( auto-fit, minmax(500px, 1fr) );
 }
 .card {
   padding: 1em;
@@ -277,7 +265,7 @@ input.file {
 
 .msg {
   text-align: center;
-  color: #7e7d7d;
+  color:#7e7d7d;
 }
 
 .progress-bar {
@@ -295,20 +283,30 @@ input.file {
   border-radius: 3px;
 }
 
+ .displayflexrow {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+ }
 .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   background-color: var(--primary-color);
   color: #fff;
- display: flex;
+  padding-top: max(0.5em, 1.5vw);
+  padding-bottom: max(0.5em, 1.5vw);
+  margin-top:auto;
+  position:fixed;
+  width:100%;
+  bottom:0px;
 }
 .footer .title {
   color: #fff;
   font-weight: bold;
+  margin-right:15px;
 }
 .footer .li {
-  margin-top: 0.5em;
   display: block;
   color: #fff;
 }
@@ -316,7 +314,6 @@ input.file {
   text-decoration: underline;
   letter-spacing: 2px;
 }
-
 .text-right {
   text-align: right;
 }
@@ -389,6 +386,9 @@ input.file {
     transform: rotate(360deg);
   }
 }
+.section .content {
+margin-top: 180px;
+}
 
 @media (max-width: 1050px) {
   .container {
@@ -399,8 +399,7 @@ input.file {
   .container {
     --container-px: 6vw;
   }
-  .section img,
-  .section .content {
+  .section img, .section .content {
     width: 100%;
   }
   .section .content {
