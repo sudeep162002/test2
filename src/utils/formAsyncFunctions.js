@@ -8,7 +8,7 @@ export const createForm = (formModel) => {
 };
 
 export const getForms = async (id) => {
-    const q = query(collection(firestore, "admin/n8v5fe1ioq8DrhSNnDKk"));
+    const q = query(collection(firestore, "admin/n8v5fe1ioq8DrhSNnDKk/forms"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
     console.log(doc.id, " => ", doc.data());

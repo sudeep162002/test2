@@ -30,7 +30,16 @@ function Login() {
       await login(email, pwd);
     } catch (e) {
       setLoading(false);
-      setErr(e.message);
+
+      console.log(e.code);
+      if (e.code === "auth/wrong-password")
+        setErr("Please enter correct password!!");
+      else if (e.code === "auth/user-not-found")
+        setErr(
+          "User with this email is not found. Please enter correct email!!"
+        );
+      else if (e.code === "auth/network-request-failed")
+        setErr("You are not connected to internet!!");
     }
   };
 
