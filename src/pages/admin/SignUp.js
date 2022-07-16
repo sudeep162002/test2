@@ -36,7 +36,9 @@ function Signup() {
       await signup(name, email, pwd);
     } catch (e) {
       setLoading(false);
-      setErr(e.message);
+      if (e.code === "auth/email-already-in-use")
+        setErr("User already exists!!");
+      else if (e.code === "auth/") setErr(e.message);
     }
   };
 

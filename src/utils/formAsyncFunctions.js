@@ -1,18 +1,20 @@
-import { doc, getDoc } from "firebase/firestore";
-import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
 import { firestore, storage } from "./firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, getDocs, doc, deleteDoc } from "firebase/firestore";
+
 export const createForm = (formModel) => {
   // return firestore.collection("forms").add({...formModel, uid: uid})
 };
 
 export const getForms = async (id) => {
-    const q = query(collection(firestore, "admin/n8v5fe1ioq8DrhSNnDKk/forms"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
+  const q = query(collection(firestore, "admin/n8v5fe1ioq8DrhSNnDKk/forms"));
+  const querySnapshot = await getDocs(q);
+  let data = [];
+  querySnapshot.forEach((doc) => {
     console.log(doc.id, " => ", doc.data());
-    });
+    data.push({ id: doc.id, ...doc.data() });
+  });
+
+  return data;
 };
 
 export const getForm = async (ops) => {
@@ -23,15 +25,16 @@ export const getForm = async (ops) => {
 };
 
 export const deleteForm = async (formId) => {
-  let submissions = await firestore
-    .collection("submissions")
-    .where("formId", "==", formId)
-    .get();
-  submissions = submissions.docs;
-  for (let submission of submissions) {
-    await firestore.collection("submissions").doc(submission.id).delete();
-  }
-  return firestore.collection("forms").doc(formId).delete();
+  //   let submissions = await firestore
+  //     .collection("submissions")
+  //     .where("formId", "==", formId)
+  //     .get();
+  //   submissions = submissions.docs;
+  //   for (let submission of submissions) {
+  //     await firestore.collection("submissions").doc(submission.id).delete();
+  //   }
+  //   return firestore.collection("forms").doc(formId).delete();
+  await deleteDoc(doc(firestore, "admin/n8v5fe1ioq8DrhSNnDKk/forms", formId));
 };
 
 export const uploadFile = (file, fileName) => {

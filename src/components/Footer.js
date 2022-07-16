@@ -2,7 +2,7 @@ function Footer(){
     return (
         <div className="footer container displayflexrow">
             <div>
-                <a href="/" className="title mr-1">Formable</a>
+                <a href="/" className="title mr-1">Quizard</a>
                 <span>&copy; {new Date().getFullYear()}</span>
             </div>
             <div className="displayflexrow">
@@ -11,7 +11,7 @@ function Footer(){
             </div>
             <div className="displayflexrow">
                 <p className="title">Find us on:</p>
-                <div> <a href="https://github.com/0shuvo0" className="li">Github</a></div>
+                <div> <a href="https://github.com/" className="li">Github</a></div>
 
             </div>
         </div>
