@@ -1,5 +1,10 @@
 :root {
-  --primary-color: #8700f5;
+  --primary-color: #6b10b5;
+  /* --primary-color:black */
+  --main-black:#272727;
+  --main-grey:#666666;
+  --main-white:#ffffff;
+  --main-green:#00ff75;
   --clr-red: #ee0014;
 }
 * {
@@ -10,6 +15,8 @@
 body {
   font-family: 'Lato', sans-serif;
   font-size: 1rem;
+  background-color: var(--main-black);
+
 }
 a {
   text-decoration: none;
@@ -21,14 +28,23 @@ a {
   border: none;
   outline: none;
   padding: 1em 2em;
+  border: 2px solid var(--primary-color);
   border-radius: 5px;
-  background-color: var(--primary-color);
+  background-color: transparent;
   color: #fff;
   font-weight: bold;
   text-transform: uppercase;
-  box-shadow: 0 3px 5px #cfcfcf;
+  /* letter-spacing: 1px; */
+  /* box-shadow: 0 3px 5px #cfcfcf; */
   display: inline-block;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+}
+.btn:hover{
+  border: 2px solid var(--main-green);
+  background-color: #00ff75;
+  color: #272727;
+  transition: all ease 0.4s;
+
 }
 label.btn {
   display: inline-block;
@@ -65,12 +81,27 @@ label.btn {
   position: relative;
   animation: 0.3s pop linear;
 }
-.modal-content.preview {
+/* .modal-content.preview {
   max-width: 600px;
+  text-align: center !important;
 }
+label{
+  font-weight: 300 !important;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  text-align: left !important;
+  font-size: 1.3em !important;
+  margin-bottom: 2em !important;
+  color: white;
+}
+.input .inline label {
+  font-size: 1em !important;
+  margin-bottom: 1em !important;
+  color: white;
+} */
 .modal-content.preview .grey-container {
   margin-bottom: 0;
-  background-color: transparent;
+  background-color: #272727;
 }
 @keyframes pop {
   0% {
@@ -97,7 +128,7 @@ label.btn {
 
 .container {
   --container-px: 15vw;
-  padding: 0 var(--container-px);
+  /* padding: 0 var(--container-px); */
 }
 .container.main {
   padding: 3vw var(--container-px);
@@ -109,12 +140,18 @@ label.btn {
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  box-shadow: 0 2px 5px #b8b8b8;
+  /* box-shadow: 0 2px 5px #b8b8b8; */
 }
 .navbar .brand {
   color: #fff;
   font-weight: bold;
+  margin-left: 3em;
   font-size: 1.2em;
+  letter-spacing: 2px;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  font-family: cursive;
 }
 .navbar .nav span a, .navbar .nav span span {
   color: #fff;
@@ -294,6 +331,7 @@ input.file {
   width: 100%;
   background-color: var(--primary-color);
   color: #fff;
+  padding: 0 2em 0 2em;
   padding-top: max(0.5em, 1.5vw);
   padding-bottom: max(0.5em, 1.5vw);
   margin-top:auto;
@@ -424,4 +462,34 @@ margin-top: 180px;
     margin-top: 0;
     margin-bottom: 1em;
   }
+}
+
+.modal-content.preview {
+  max-width: 600px;
+  text-align: center !important;
+}
+label{
+  font-weight: 300 !important;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  text-align: left !important;
+  font-size: 1.3em !important;
+  margin-bottom: 2em !important;
+  color: white;
+}
+.input .inline label {
+  font-size: 1em !important;
+  margin-bottom: 1em !important;
+  color: white;
+}
+.input .inline{
+  border:2px solid var(--primary-color);
+  padding:0.2em 0.4em;
+  border-radius:0.6em ;
+}
+.input .inline:hover{
+  border:2px solid var(--main-green);
+  transition: all ease 0.4s;
+  /* padding:0.2em 0.4em;
+  border-radius:0.6em ; */
 }
