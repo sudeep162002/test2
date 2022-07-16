@@ -93,6 +93,14 @@ label.btn {
 .heading {
   font-size: 2.5em;
   text-transform: capitalize;
+  text-align: center;
+  margin-top:0.3em;
+}
+.center{
+  margin-top:20px;
+  margin-left: 60px;
+  top: 50%;
+  left: 50%;
 }
 
 .container {
@@ -219,6 +227,7 @@ input.file {
 
 .cards-container {
   margin-top: 2em;
+  margin-left: 1em;
   display: grid;
   gap: 1em;
   grid-template-columns: repeat( auto-fill, minmax(300px, 1fr) );
@@ -227,9 +236,9 @@ input.file {
   grid-template-columns: repeat( auto-fit, minmax(500px, 1fr) );
 }
 .card {
-  padding: 1em;
+  padding: 0.5em;
   box-shadow: 0 2px 5px #b8b8b8;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 .card .title {
   display: flex;
@@ -242,7 +251,6 @@ input.file {
   color: #999;
 }
 .card-nav {
-  text-align: right;
   padding-top: 0.5em;
 }
 .card-nav .nav-item {
@@ -357,7 +365,7 @@ input.file {
 }
 
 .link {
-  color: var(--primary-color);
+  color: white;
   word-wrap: break-word;
 }
 
@@ -390,6 +398,9 @@ input.file {
 margin-top: 180px;
 }
 
+.primary-color{
+  color:var(--primary-color);
+}
 @media (max-width: 1050px) {
   .container {
     --container-px: 10vw;
