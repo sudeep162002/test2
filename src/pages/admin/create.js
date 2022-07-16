@@ -3,12 +3,14 @@ import { useHistory } from "react-router-dom";
 
 import AddFieldModal from "../../components/AddFieldModal";
 import RenderPlainForm from "../../components/RenderPlainForm";
+import { useAuth } from "../../context/AuthContext";
 
 import { updateObjState } from "../../utils";
 
 import { createForm as saveForm } from "../../utils/formAsyncFunctions";
 
 function Create() {
+  const { currentUser } = useAuth();
   const [showAddModal, setShowAddModal] = useState(false);
   const [inputType, setInputType] = useState("text");
   const [err, setErr] = useState("");
@@ -24,13 +26,7 @@ function Create() {
   const [formModel, setFormModel] = useState({
     title: "",
     createdAt: +new Date(),
-    questions: [
-      {
-        title: "Enter your Name",
-        type: "short-text",
-        required: true,
-      },
-    ],
+    questions: [],
     endMessage: "",
     expiration: "",
   });
@@ -41,7 +37,7 @@ function Create() {
     setFormModel(_model);
   };
 
-  const inputTypes = ["mosa", "moma", "mosaf", "momaf"];
+  const inputTypes = ["mosa", "moma"];
 
   const createForm = async () => {
     if (loading) return;
@@ -54,14 +50,14 @@ function Create() {
     if (formModel.expiration.trim() && formModel.expiration < 1)
       return setErr("Validity should be at least an hour");
 
-    if (formModel.questions.length < 2)
+    if (formModel.questions.length < 1)
       return setErr("You need to add at least one field");
 
     setLoading(true);
     try {
-      await saveForm(formModel);
+      await saveForm(currentUser.uid, formModel);
       setLoading(false);
-      history.push("/forms");
+      history.push("/admin");
     } catch (e) {
       setErr(e.message);
       setLoading(false);
@@ -74,7 +70,7 @@ function Create() {
 
       <div className="form">
         <div className="input">
-          <label>Title of the from</label>
+          <label>Title of the form</label>
           <input
             type="text"
             placeholder="Enter title"

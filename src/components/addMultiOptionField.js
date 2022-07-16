@@ -25,7 +25,7 @@ function AddMultiOptionField({ inputType, add, close }) {
   };
 
   const addOption = () => {
-    if (!option.trim()) return setOpterr("Option is required");
+    if (!option.content.trim()) return setOpterr("Option is required");
     let _opts = [...options];
     _opts.push(option);
     setOption("");
@@ -56,7 +56,7 @@ function AddMultiOptionField({ inputType, add, close }) {
                 className="mr-1"
                 name="inputs"
               />
-              <label>{opt}</label>
+              <label>{opt.content}</label>
             </div>
           ))}
         </div>
@@ -66,7 +66,12 @@ function AddMultiOptionField({ inputType, add, close }) {
           type="text"
           className="mb-1"
           placeholder="Enter a option"
-          onChange={(e) => setOption(e.target.value)}
+          onChange={(e) =>
+            setOption({
+              id: options.length,
+              content: e.target.value,
+            })
+          }
           ref={inputRef}
         />
         {opterr && <p className="err mb-1 text-small">{opterr}</p>}

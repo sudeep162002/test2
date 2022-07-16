@@ -10,20 +10,15 @@ import {
   addDoc,
 } from "firebase/firestore";
 
-export const createForm = (formModel) => {
+export const createForm = (adminId, formModel) => {
   // return firestore.collection("forms").add({...formModel, uid: uid})
 
-  const cityRef = collection(
-    firestore,
-    "admin",
-    "n8v5fe1ioq8DrhSNnDKk",
-    "forms"
-  );
+  const cityRef = collection(firestore, "admin", adminId, "forms");
   return addDoc(cityRef, formModel);
 };
 
 export const getForms = async (id) => {
-  const q = query(collection(firestore, "admin/n8v5fe1ioq8DrhSNnDKk/forms"));
+  const q = query(collection(firestore, `admin/${id}/forms`));
   const querySnapshot = await getDocs(q);
   let data = [];
   querySnapshot.forEach((doc) => {
@@ -34,19 +29,13 @@ export const getForms = async (id) => {
   return data;
 };
 
-export const getForm = async (adminId, id) => {
+export const getForm = async (adminId, formId) => {
   // let docs = await firestore.collection("forms").get(ops);
   // let doc = docs.docs[0];
   // doc = { ...doc.data(), id: doc.id };
   // return doc;
 
-  const docRef = doc(
-    firestore,
-    "admin",
-    "n8v5fe1ioq8DrhSNnDKk",
-    "forms",
-    "Qx7drpo6vwxEC5COYf6V"
-  );
+  const docRef = doc(firestore, "admin", adminId, "forms", formId);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
@@ -58,7 +47,7 @@ export const getForm = async (adminId, id) => {
   return docSnap.data();
 };
 
-export const deleteForm = async (formId) => {
+export const deleteForm = async (adminId, formId) => {
   //   let submissions = await firestore
   //     .collection("submissions")
   //     .where("formId", "==", formId)
@@ -68,7 +57,7 @@ export const deleteForm = async (formId) => {
   //     await firestore.collection("submissions").doc(submission.id).delete();
   //   }
   //   return firestore.collection("forms").doc(formId).delete();
-  await deleteDoc(doc(firestore, "admin/n8v5fe1ioq8DrhSNnDKk/forms", formId));
+  await deleteDoc(doc(firestore, `admin/${adminId}/forms`, formId));
 };
 
 export const uploadFile = (file, fileName) => {
@@ -76,18 +65,14 @@ export const uploadFile = (file, fileName) => {
   return ref.put(file);
 };
 
-export const submitForm = async (submission, formId) => {
+export const submitForm = async (submission, adminId, formId) => {
   // firestore.collection("submissions").add({
   //   submission,
   //   formId,
   // });
   await setDoc(
-    doc(firestore, "admin", "n8v5fe1ioq8DrhSNnDKk", "submissions", ""),
-    {
-      name: "Los Angeles",
-      state: "CA",
-      country: "USA",
-    }
+    doc(firestore, "admin", adminId, "submissions", formId),
+    submission
   );
 };
 

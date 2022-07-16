@@ -18,7 +18,6 @@ function RenderReactiveForm({ model, onSubmitted }) {
   );
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
-
   const handleSubmit = async () => {
     setErr("");
     if (loading) return;
@@ -80,8 +79,7 @@ function RenderReactiveForm({ model, onSubmitted }) {
               }
             ></textarea>
           </div>
-        ) : field.type === "mosa" ||
-          field.type === "moma" ? (
+        ) : field.type === "mosa" || field.type === "moma" ? (
           <MultiOptionField
             key={index}
             fieldModel={field}

@@ -15,7 +15,7 @@ function AdminDashboard() {
     const fetchData = async () => {
       try {
         // get all the forms for this user id
-        let forms = await getForms("OK");
+        let forms = await getForms(currentUser.uid);
 
         setForms(forms);
         console.log(forms);
@@ -26,7 +26,7 @@ function AdminDashboard() {
       }
     };
     fetchData();
-  }, []);
+  }, [currentUser]);
 
   const onFormDelete = (id) => {
     setForms(forms.filter((form) => form.id !== id));

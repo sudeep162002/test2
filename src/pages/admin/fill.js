@@ -10,7 +10,7 @@ import { expired } from "../../utils";
 
 function Fill() {
   const { adminId, id } = useParams();
-
+  console.log(adminId);
   const [form, setForm] = useState(null);
   const [msg, setMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -20,7 +20,7 @@ function Fill() {
     // if (!localStorage.getItem("gfc-user")) return;
     const fetchData = async () => {
       try {
-        let frm = await getForm({ adminId, id });
+        let frm = await getForm(adminId, id);
         setForm(frm);
         setLoading(false);
       } catch (e) {
@@ -29,7 +29,7 @@ function Fill() {
       }
     };
     fetchData();
-  }, [id]);
+  }, [adminId, id]);
 
   return (
     <div>
