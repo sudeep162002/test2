@@ -24,11 +24,11 @@ function FormCard({ form, onDelete }){
                 <span>{form.title}</span>
                 <span className="card-date">{getDateFromMillis(form.createdAt)}</span>
             </h2>
-            <a href={`${window.location.origin}/fill/${form.id}`} rel="noreferrer" className="link mb-1" target="_blank">{`${window.location.origin}/fill/${form.id}`}</a>
             <p className="card-nav">
                 <span className="nav-item" onClick={() => setPreview(true)}>preview</span>
                 <Link to={"/submissions/" + form.id} className="nav-item">submissions</Link>
                 <span className="nav-item" onClick={handleDelete}>{ loading ? <span className="spinner red"></span> : <span>delete</span>}</span>
+                <span className="btn mt-1 center primary-color"><a href={`${window.location.origin}/fill/${form.id}`} rel="noreferrer" className="link mb-1" target="_blank">Open Form</a></span>
             </p>
             {preview && (
                 <div className="modal">

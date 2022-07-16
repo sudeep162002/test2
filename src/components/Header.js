@@ -18,7 +18,7 @@ function Header() {
       <nav className="nav">
         {currentUser ? (
           <span>
-            <Link to="/forms">my forms</Link>
+            <Link to="/forms">My Quizzes</Link>
             <Link to="/create">create</Link>
             <span onClick={handleLogout}>logout</span>
           </span>
