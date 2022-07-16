@@ -56,7 +56,7 @@ function Forms() {
   );
 }
 
-export default Forms;
+export default FormSettings;
 
 // import React from 'react'
 

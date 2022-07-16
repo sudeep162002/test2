@@ -10,7 +10,8 @@ import SignUp from "./pages/admin/SignUp";
 import Home from "./pages/Home";
 import FreeRoute from "./utils/FreeRoute";
 import PrivateRoute from "./utils/PrivateRoute";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
+import CreateForm from "./pages/admin/CreateForm";
 function App() {
   return (
     <>
@@ -21,9 +22,8 @@ function App() {
             <FreeRoute exact path="/" component={Home} />
             <FreeRoute path="/login" component={Login} />
             <FreeRoute path="/signup" component={SignUp} />
-            <FreeRoute path="/admin" component={FormSettings} />
+            <PrivateRoute path="/admin" component={AdminDashboard} />
             <PrivateRoute
-              exact
               path="/admin/:formId/analytics"
               component={FormAnalytics}
             />
@@ -31,10 +31,11 @@ function App() {
               path="/admin/:formId/settings"
               component={FormSettings}
             />
+            <PrivateRoute path="/create" component={CreateForm} />
           </Switch>
         </AuthProvider>
       </Router>
-      <Footer/>
+      <Footer />
     </>
   );
 }
