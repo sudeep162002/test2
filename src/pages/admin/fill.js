@@ -36,7 +36,7 @@ function Fill() {
 
   return (
     <div>
-      <h1 className="heading">{form ? form.title : "Fill in the form"}</h1>
+      <h1 className="heading" style={{color:"white",margin:"2em 0",fontWeight:"normal",letterSpacing:"1px"}}>{form ? form.title : "Fill in the form"}</h1>
       {loading ? (
         <p className="text-center mt-1">
           <span className="spinner"></span>

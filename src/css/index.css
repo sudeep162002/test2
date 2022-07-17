@@ -24,7 +24,7 @@ a {
 
 .btn {
   margin:20px;
-  margin-top:160px;
+  /* margin-top:160px; */
   border: none;
   outline: none;
   padding: 1em 2em;
@@ -73,7 +73,7 @@ label.btn {
 .modal-content {
   background-color: #fff;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
   padding: 2em;
@@ -204,6 +204,7 @@ label{
 }
 
 .form {
+  /* align-items: center; */
   margin: 2em 0;
 }
 
@@ -485,7 +486,7 @@ label{
   word-spacing: 1px;
   text-align: left !important;
   font-size: 1.3em !important;
-  margin-bottom: 2em !important;
+  margin-bottom: 0.5em !important;
   color: white;
 }
 .input .inline label {

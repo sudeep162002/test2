@@ -26,44 +26,45 @@ function FormCard({ form, onDelete }) {
   };
 
   return (
-    <div className="card">
-      <h2 className="title mb-1">
+    <div className="card" style={{padding:"2em 1em 2em 1em",boxShadow:"none",border:"2px solid #8700f5"}}>
+      <p className="card-date" style={{fontSize:"1em",textAlign:"right",marginBottom:"2em"}}>{getDateFromMillis(form.createdAt)}</p>
+      <h2 className="title mb-1" style={{color:"white",letterSpacing:"0.1em",fontWeight:"normal"}}>
         <span>{form.title}</span>
-        <span className="card-date">{getDateFromMillis(form.createdAt)}</span>
-      </h2>
-      <p className="card-nav">
-        <span className="nav-item" onClick={() => setPreview(true)}>
+        </h2>
+      <p className="card-nav" style={{textAlign:"left"}}>
+        <p className="nav-item" onClick={() => setPreview(true)}>
           preview
-        </span>
+        </p>
         <Link to={`/analytics/${form.id}`} className="nav-item" 
         // onClick={handleClick}
         >
           submissions
         </Link>
-        <span className="nav-item" onClick={handleDelete}>
+        <p className="nav-item" onClick={handleDelete}>
           {loading ? (
             <span className="spinner red"></span>
           ) : (
             <span>delete</span>
           )}
-        </span>
-        <span className="btn mt-1 center primary-color">
+        </p>
+        <p className="btn mt-1 center primary-color">
           <a
             href={`${window.location.origin}/fill/${currentUser.uid}/${form.id}`}
             rel="noreferrer"
             className="link mb-1"
             target="_blank"
+            style={{fontSize:"0.8em",fontWeight:"normal",padding:"0.4em 0.6em",marginTop:"1em"}}
           >
             Open Form
           </a>
-        </span>
+        </p>
       </p>
       {preview && (
         <div className="modal">
           <div className="modal-content preview">
-            <span className="close" onClick={() => setPreview(false)}>
+            <p className="close" style={{fontSize:"2em"}} onClick={() => setPreview(false)}>
               &times;
-            </span>
+            </p>
             <RenderPlainForm model={form} />
           </div>
         </div>

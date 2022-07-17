@@ -83,10 +83,11 @@ export default function Login() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor:"#272727"
       }}
     >
       <ThemeWrapper>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" style={{backgroundColor:"white"}}>
           <CssBaseline />
           <Box
             sx={{
@@ -141,13 +142,14 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="/forgotpassword" variant="body2">
+                  {/* <Link href="/forgotpassword" variant="body2">
                     Forgot password?
-                  </Link>
+                  </Link> */}
                 </Grid>
                 <Grid item>
-                  <Link href="/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                Don't have an account?
+                  <Link href="/signup" variant="body2" style={{marginLeft:"0.6em",fontSize:"1em"}}>
+                    {"Sign Up"}
                   </Link>
                 </Grid>
               </Grid>

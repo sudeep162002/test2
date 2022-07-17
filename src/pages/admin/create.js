@@ -67,13 +67,14 @@ function Create() {
   };
 
   return (
-    <div>
-      <h1 className="heading">Create new form</h1>
+    <div style={{display:"flex",flexDirection:"column"}}>
+      <h1 className="heading" style={{color:"white",letterSpacing:"0.1em",fontWeight:"normal",margin:"2em 0"}}>Create new form</h1>
 
       <div className="form">
         <div className="input">
-          <label>Title of the form</label>
+          <label style={{marginBottom:"0 !important"}}>Title of the form</label>
           <input
+          style={{margin:"0"}}
             type="text"
             placeholder="Enter title"
             onChange={(e) =>
@@ -124,9 +125,9 @@ function Create() {
         </div>
       </div>
 
-      <p className="mb-2 text-right">
+      <p>
         {err && <p className="err text-right mb-1">{err}</p>}
-        <button className="btn" onClick={createForm}>
+        <button className="btn" style={{marginTop:"1em"}} onClick={createForm}>
           {loading ? (
             <span className="spinner white"></span>
           ) : (
@@ -136,7 +137,7 @@ function Create() {
       </p>
 
       <div className="add-field-container grey-container">
-        <p>Add new field</p>
+        <p  style={{color:"white",letterSpacing:"0.1em"}}>Add new field</p>
         {inputTypes.map((inputType, index) => (
           <button
             className="btn"

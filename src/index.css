@@ -82,8 +82,9 @@ label.btn {
 }
 .modal-content .close {
   position: absolute;
-  top: 0.8em;
-  right: 0.8em;
+  top: 0.1em;
+  right: 0.1em;
+  transform: translateY(-2em) !important;
   color: var(--clr-red);
   cursor: pointer;
 }
@@ -161,7 +162,7 @@ label.btn {
 }
 
 .form {
-  margin: 2em 0;
+  margin: 2em;
 }
 
 .grey-container {
@@ -233,8 +234,8 @@ input.file {
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 }
 .card {
-  padding: 1em;
-  box-shadow: 0 2px 5px #b8b8b8;
+  /* padding: 1em; */
+  /* box-shadow: 0 2px 5px #b8b8b8; */
   border-radius: 5px;
 }
 .card .title {
@@ -248,7 +249,7 @@ input.file {
   color: #999;
 }
 .card-nav {
-  text-align: right;
+  /* text-align: right; */
   padding-top: 0.5em;
 }
 .card-nav .nav-item {

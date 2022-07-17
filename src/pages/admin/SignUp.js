@@ -97,10 +97,11 @@ export default function SignUp() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor:"#272727"
       }}
     >
       <ThemeWrapper>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" style={{backgroundColor:"white"}}>
           <CssBaseline />
           <Box
             sx={{
@@ -179,8 +180,9 @@ export default function SignUp() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="/signin" variant="body2">
-                    Already have an account? Sign in
+                Already have an account? 
+                  <Link href="/signin" variant="body2" style={{marginLeft:"0.6em",fontSize:"1em"}}>
+                     Sign in
                   </Link>
                 </Grid>
               </Grid>
