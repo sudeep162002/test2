@@ -80,6 +80,7 @@ function Create() {
   return (
     <div>
       <h1 className="heading">Create new form</h1>
+  <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
 
       <div className="form">
         <div className="input">
@@ -133,7 +134,7 @@ function Create() {
         </div>
       </div>
 
-      <p className="mb-2 text-right">
+      {/* <p className="mb-2 text-right">
         {err && <p className="err text-right mb-1">{err}</p>}
         <button className="btn" onClick={createForm}>
           {loading ? (
@@ -142,7 +143,7 @@ function Create() {
             <span>create form</span>
           )}
         </button>
-      </p>
+      </p> */}
 
       <div className="add-field-container grey-container">
         <p>Add new field</p>
@@ -155,8 +156,16 @@ function Create() {
             {inputType.replace("-", " ")}
           </button>
         ))}
+                {err && <p className="err text-right mb-1">{err}</p>}
+        <button className="btn" onClick={createForm}>
+          {loading ? (
+            <span className="spinner white"></span>
+          ) : (
+            <span>create form</span>
+          )}
+        </button>
       </div>
-
+      </div>
       {showAddModal && (
         <AddFieldModal
           inputType={inputType}

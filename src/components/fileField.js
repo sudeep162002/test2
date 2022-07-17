@@ -19,7 +19,6 @@ function FileField({ fieldModel, onCompleted }){
 
         if(!file) return
         if(fieldModel.accepted.indexOf(ext) === -1) return setErr("Choose file with thoe following extensions: " + fieldModel.accepted.join(", "))
-        //chechk if file size is biggern than  2MB
         if(file.size > 2*1024*1024) return setErr("File size should be less than than 2MB")
 
         setShowProgress(true)

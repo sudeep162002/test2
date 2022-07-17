@@ -39,8 +39,6 @@ function Create() {
     setFormModel(_model);
   };
 
-  const inputTypes = ["mosa", "moma"];
-
   const createForm = async () => {
     if (loading) return;
     setErr("");
@@ -67,14 +65,14 @@ function Create() {
   };
 
   return (
-    <div style={{display:"flex",flexDirection:"column"}}>
-      <h1 className="heading" style={{color:"white",letterSpacing:"0.1em",fontWeight:"normal",margin:"2em 0"}}>Create new form</h1>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <h1 className="heading" style={{ color: "white", letterSpacing: "0.1em", fontWeight: "normal", margin: "2em 0" }}>Create new form</h1>
 
       <div className="form">
         <div className="input">
-          <label style={{marginBottom:"0 !important"}}>Title of the form</label>
+          <label style={{ marginBottom: "0 !important" }}>Title of the form</label>
           <input
-          style={{margin:"0"}}
+            style={{ margin: "0" }}
             type="text"
             placeholder="Enter title"
             onChange={(e) =>
@@ -125,28 +123,13 @@ function Create() {
         </div>
       </div>
 
-      <p>
-        {err && <p className="err text-right mb-1">{err}</p>}
-        <button className="btn" style={{marginTop:"1em"}} onClick={createForm}>
-          {loading ? (
-            <span className="spinner white"></span>
-          ) : (
-            <span>create form</span>
-          )}
-        </button>
-      </p>
-
       <div className="add-field-container grey-container">
-        <p  style={{color:"white",letterSpacing:"0.1em"}}>Add new field</p>
-        {inputTypes.map((inputType, index) => (
-          <button
-            className="btn"
-            key={index}
-            onClick={() => openAddModal(inputType)}
-          >
-            {inputType.replace("-", " ")}
-          </button>
-        ))}
+        <button
+          className="btn"
+          onClick={() => openAddModal("moma")}
+        >
+          Add Question
+        </button>
       </div>
 
       {showAddModal && (
@@ -156,6 +139,18 @@ function Create() {
           add={addFieldToFormModel}
         />
       )}
+
+      <p>
+        {err && <p className="err text-right mb-1">{err}</p>}
+        <button className="btn" style={{ marginTop: "1em" }} onClick={createForm}>
+          {loading ? (
+            <span className="spinner white"></span>
+          ) : (
+            <span>create form</span>
+          )}
+        </button>
+      </p>
+
     </div>
   );
 }

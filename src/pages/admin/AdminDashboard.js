@@ -8,13 +8,10 @@ function AdminDashboard() {
   const [forms, setForms] = useState([]);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(true);
-  // current admin object
   const { currentUser } = useAuth();
   useEffect(() => {
-    // if(!localStorage.getItem('gfc-user')) return
     const fetchData = async () => {
       try {
-        // get all the forms for this user id
         let forms = await getForms(currentUser.uid);
 
         setForms(forms);
@@ -34,7 +31,7 @@ function AdminDashboard() {
 
   return (
     <div>
-      <h1 className="heading">My Forms</h1>
+      <h1 className="heading" style={{color:"white",fontWeight:"normal",letterSpacing:"0.2em"}}>My Quizzes</h1>
       {loading ? (
         <p className="text-center mt-1">
           <span className="spinner"></span>

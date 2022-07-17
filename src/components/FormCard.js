@@ -13,10 +13,6 @@ function FormCard({ form, onDelete }) {
   const [preview, setPreview] = useState(false);
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
-  // const handleClick=()=>{
-  //   getFormData(form,currentUser.uid);
-  //   console.log("Rutsssss");
-  // }
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this form?")) return;
     setLoading(true);
@@ -36,7 +32,6 @@ function FormCard({ form, onDelete }) {
           preview
         </p>
         <Link to={`/analytics/${form.id}`} className="nav-item" 
-        // onClick={handleClick}
         >
           submissions
         </Link>

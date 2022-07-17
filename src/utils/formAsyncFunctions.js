@@ -10,7 +10,6 @@ import {
 } from "firebase/firestore";
 
 export const createForm = (adminId, formModel) => {
-  // return firestore.collection("forms").add({...formModel, uid: uid})
   const cityRef = collection(firestore, "admin", adminId, "forms");
   return addDoc(cityRef, formModel);
 };
@@ -28,10 +27,6 @@ export const getForms = async (id) => {
 };
 
 export const getForm = async (adminId, formId) => {
-  // let docs = await firestore.collection("forms").get(ops);
-  // let doc = docs.docs[0];
-  // doc = { ...doc.data(), id: doc.id };
-  // return doc;
 
   const docRef = doc(firestore, "admin", adminId, "forms", formId);
   const docSnap = await getDoc(docRef);
@@ -39,22 +34,12 @@ export const getForm = async (adminId, formId) => {
   if (docSnap.exists()) {
     console.log("Document data:", docSnap.data());
   } else {
-    // doc.data() will be undefined in this case
     console.log("No such document!");
   }
   return docSnap.data();
 };
 
 export const deleteForm = async (adminId, formId) => {
-  //   let submissions = await firestore
-  //     .collection("submissions")
-  //     .where("formId", "==", formId)
-  //     .get();
-  //   submissions = submissions.docs;
-  //   for (let submission of submissions) {
-  //     await firestore.collection("submissions").doc(submission.id).delete();
-  //   }
-  //   return firestore.collection("forms").doc(formId).delete();
   await deleteDoc(doc(firestore, `admin/${adminId}/forms`, formId));
 };
 
@@ -79,20 +64,13 @@ export const getSubmissions = async (opts) => {
   return submissions;
 };
 
-// function to get form data for analytics
 export const getFormData = async (formId, adminId) => {
-  // ek form ka saara data aa jaega isse
   const q = query(
     collection(firestore, "submissions")
-    // where("formId", "==", formId),
-    // where("adminId", "==", adminId)
   );
   const querySnapshot = await getDocs(q);
-  // console.log(querySnapshot)
   let data = [];
-  // let count = 0;
   querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
     console.log(doc.data());
     data.push(doc.data());
 
@@ -104,43 +82,35 @@ export const getFormData = async (formId, adminId) => {
 
 export const getIndividualStatisticalData = (formData) => {
   console.log("FORM DATA", formData);
-  let totalQuestions = 0;
-  //Stores data of All users
-  let finalData = [];
+  let totalQuestions=0
+  let finalData=[];
   let userName;
-  //For each user
-  Object.entries(formData).map((user) => {
-    //console.log("Each User", user[1]);
-    let d = [];
-    let totalQuestions = 0;
-    let correctAns = 0;
-    let totalUserMarks = 0;
-    //For each question
-    Object.entries(user[1]).map((question) => {
-      userName = question[1].userName;
-      d.push(question[1]);
-      totalQuestions = totalQuestions + 1;
-      //console.log(question[1].correctAns-1,question[1].value[0],"dddddd")
-      let positiveMarks = parseInt(question[1].positiveMarks);
-      let negativeMarks = parseInt(question[1].negativeMarks);
-      if (question[1].correctAns - 1 == -1) {
-        // totalUserMarks += 0;
-      } else if (question[1].correctAns - 1 == question[1].value[0]) {
-        totalUserMarks += positiveMarks;
-        correctAns += 1;
-      } else {
-        totalUserMarks += negativeMarks;
-      }
-    });
-    console.log("TOTAL USER MARKS", totalUserMarks);
-    //Store totalQuestion and correctAns for every user
-    finalData.push({
-      username: userName,
-      totalQuestions: totalQuestions,
-      totalMarks: totalUserMarks,
-      correctAns: correctAns,
-    });
-    // finalData.push(d);
+   Object.entries(formData).map((user) => {
+      let d = [];
+      totalQuestions=0;
+      let correctAns=0;
+      let totalUserMarks=0;
+      Object.entries(user[1]).map((question) => {
+          userName=question[1].userName
+          d.push(question[1])
+          totalQuestions+=1;
+          let positiveMarks=parseInt(question[1].positiveMarks)
+          let negativeMarks=parseInt(question[1].negativeMarks)
+          if(question[1].correctAns-1==-1)
+          {
+              totalUserMarks+=0 
+          }
+          else if((question[1].correctAns-1)==question[1].value[0])
+          {
+            totalUserMarks+=positiveMarks
+            correctAns+=1;
+          }
+          else
+          {
+            totalUserMarks+=negativeMarks
+          }
+      });
+      finalData.push({"username":userName,"totalQuestions": totalQuestions,"totalMarks":totalUserMarks,"correctAns":correctAns});
   });
   console.log("Total Questions", totalQuestions);
   console.log("All User Details", finalData);
@@ -163,21 +133,13 @@ export const getAllStatisticalData = (formData) => {
     100: 0,
   };
   Object.entries(allUserData).map((user) => {
-    let totalQuestions = user[1].totalQuestions;
-    let correctMarks = user[1].correctAns;
-    let relativeMarks =
-      parseInt((correctMarks * 100) / totalQuestions / 10) * 10;
-    //console.log("correct",correctMarks,"totalQuestions",totalQuestions,"relativeMarks",relativeMarks)
-    allRanges[relativeMarks]++;
+    
+    let totalQuestions=user[1].totalQuestions
+    let correctMarks=user[1].correctAns
+    let relativeMarks=parseInt(((correctMarks*100)/totalQuestions)/10)*10
+    allRanges[relativeMarks]++
   });
   console.log("All Ranges here", allRanges);
   return allRanges;
 };
-export const getTotalMarks = (formData) => {
-  let marksArray = [];
-  // formData.forEach((user)=>{
-  //   let marks=0;
-  //   user.questions
-  // })
-  console.log(formData);
-};
+
