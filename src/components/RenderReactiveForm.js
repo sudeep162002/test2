@@ -55,12 +55,15 @@ function RenderReactiveForm({ model, onSubmitted }) {
   };
 
   return (
-    <div className="main-form mt-1">
-      <input
+    <div className="main-form mt-1" style={{width:"50%",paddingLeft:"2em"}}>
+      <div>
+      <input 
+      style={{outline:"none", border:"3px solid #8700f5",height:"3em",width:"40%",backgroundColor:"#fffff",marginBottom:"3em",borderRadius:"0.5em"}}
         placeholder="Enter Your Name"
         value={userName}
         onChange={handleNameChange}
       />
+      </div>
       {fillableModel.map((field, index) =>
         ["short-text", "number"].indexOf(field.type) > -1 ? (
           <div key={index} className="input">
@@ -132,7 +135,7 @@ function RenderReactiveForm({ model, onSubmitted }) {
         )
       )}
       {err && <p className="err mb-1">{err}</p>}
-      <button className="btn" onClick={handleSubmit}>
+      <button className="btn" style={{marginTop:"2em"}} onClick={handleSubmit}>
         {loading ? (
           <span className="spinner white"></span>
         ) : (

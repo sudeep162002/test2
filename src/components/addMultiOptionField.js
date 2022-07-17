@@ -100,7 +100,7 @@ function AddMultiOptionField({ inputType, add, close }) {
         <input type="number" value={positiveMarks} onChange={(e) => setPositiveMarks(e.target.value)} />
       </div>
       <div className="input inline">
-        <label>Correct Ans: </label>
+        <label>Negative Marks: </label>
         <input type="number" value={negativeMarks} onChange={(e) => setNegativeMarks(e.target.value)} />
       </div>
       {err && <p className="err mb-1">{err}</p>}
