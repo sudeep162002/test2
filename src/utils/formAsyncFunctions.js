@@ -90,7 +90,7 @@ export const getIndividualStatisticalData = (formData) => {
       //For each question
       Object.entries(user[1]).map((question) => {
           userName=question[1].userName
-          totalQuestions+=1;
+          //totalQuestions+=1;
           console.log("Question ",question,"OOO",question[1])
           let ansCorrect=0
           let isAttempted=0,isIncorrect=0
@@ -111,10 +111,7 @@ export const getIndividualStatisticalData = (formData) => {
                   isIncorrect=1
                 }
           });
-          if(isAttempted===1)
-          {
-            totalAttempted++
-          }
+            totalQuestions+=parseInt(question[1].positiveMarks)
           if(isIncorrect===0)
           {
             totalMarks+=parseInt(question[1].positiveMarks)
@@ -126,7 +123,7 @@ export const getIndividualStatisticalData = (formData) => {
             totalCorrect++
           }
           console.log(isAttempted,isIncorrect,question[1].positiveMarks,question[1].negativeMarks)
-          console.log(totalCorrect,totalIncorrect,totalAttempted,totalMarks)
+          console.log(totalCorrect,totalIncorrect,totalAttempted,totalMarks,totalQuestions,"PPP")
       });
       finalData.push({"username":userName,"totalQuestions": totalQuestions,"totalAttempted":totalAttempted,"totalMarks":totalMarks,"correctAns":totalCorrect,"wrongAns":totalIncorrect});
     });
@@ -156,13 +153,14 @@ export const getAllStatisticalData = async (formData) => {
     console.log("=======",user[1],user[2])
 
     let totalQuestions=user[1].totalQuestions
-    let correctMarks=user[1].correctAns
+    let correctMarks=user[1].totalMarks        
     if(correctMarks<0)
     {
       allRanges[0]++
-    }
-    let relativeMarks=(parseInt(((correctMarks*100)/totalQuestions)/10)*10)+10
+    }else{
+    let relativeMarks=(parseInt(((correctMarks*100)/totalQuestions)/10)*10)
     allRanges[relativeMarks]++
+    }
   });
   console.log("All Ranges here", allRanges);
   return allRanges;
