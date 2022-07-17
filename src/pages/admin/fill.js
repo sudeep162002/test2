@@ -12,14 +12,12 @@ import { expired } from "../../utils";
 
 function Fill() {
   const { adminId, id } = useParams();
-  // console.log(adminId);
   const [form, setForm] = useState(null);
   const [msg, setMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // if (!localStorage.getItem("gfc-user")) return;
     const fetchData = async () => {
       try {
         let frm = await getForm(adminId, id);
@@ -55,7 +53,6 @@ function Fill() {
         ) : (
           <RenderReactiveForm
             model={form}
-            // formId={id}
             onSubmitted={() => setSubmitted(true)}
           />
         )

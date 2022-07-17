@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer(){
     return (
-        <div className="footer container displayflexrow">
+        <div className="footer container displayflexrow" style={{ position:"fixed",bottom:"0vh",zIndex:4}}>
             <div>
                 <a href="/" className="title mr-1">Quizard</a>
                 <span>&copy; {new Date().getFullYear()}</span>

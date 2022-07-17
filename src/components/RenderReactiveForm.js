@@ -24,7 +24,6 @@ function RenderReactiveForm({ model, onSubmitted }) {
 
   const handleNameChange = (e) => {
     setUserName(e.target.value);
-    console.log(userName);
   };
 
   const handleSubmit = async () => {
@@ -79,7 +78,7 @@ function RenderReactiveForm({ model, onSubmitted }) {
                   fillableModel,
                   index,
                   "value",
-                  e.target.value
+                  e
                 )
               }
             />
@@ -106,14 +105,14 @@ function RenderReactiveForm({ model, onSubmitted }) {
           <MultiOptionField
             key={index}
             fieldModel={field}
-            onSelected={(res) =>
+            onSelected={(res) =>{
               updateArrOfObjState(
                 setFillableModel,
                 fillableModel,
                 index,
                 "value",
                 res
-              )
+              )}
             }
           />
         ) : field.type === "file" ? (
