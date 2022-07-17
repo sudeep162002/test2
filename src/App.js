@@ -15,12 +15,11 @@ import Create from "./pages/admin/create";
 import Fill from "./pages/admin/Fill";
 function App() {
   return (
-    <>
+    <div style={{paddingBottom:"14em",backgroundColor:"#272727"}}>
       <Router>
         <AuthProvider>
           <Header />
           <Switch>
-            {/* <Route path="/submissions/:formId"  component={FormAnalytics}/> */}
             <PrivateRoute path="/analytics/:formId" component={FormAnalytics} />
             <Route path="/fill/:adminId/:id" component={Fill} />
             <FreeRoute exact path="/" component={Home} />
@@ -36,7 +35,7 @@ function App() {
         </AuthProvider>
       </Router>
       <Footer />
-    </>
+    </div>
   );
 }
 

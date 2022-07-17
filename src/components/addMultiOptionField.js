@@ -2,19 +2,20 @@ import React from "react";
 
 import { useState, createRef } from "react";
 
-function AddMultiOptionField({ inputType, add, close }) {
+function AddMultiOptionField({ inputType, add, close, isMosa }) {
   const [err, setErr] = useState("");
   const [opterr, setOpterr] = useState("");
-   const [correctAns,setCorrectAns]=useState(0);
-   const [positiveMarks,setPositiveMarks]=useState(0);
-   const [negativeMarks,setNegativeMarks]=useState(0);
+  const [correctAns, setCorrectAns] = useState(0);
+  const [positiveMarks, setPositiveMarks] = useState(0);
+  const [negativeMarks, setNegativeMarks] = useState(0);
   const [title, setTitle] = useState("");
   const [required, setRequired] = useState(false);
   const inputRef = createRef();
   const [options, setOptions] = useState([]);
-  const [option, setOption] = useState("");
-
+  const [option, setOption] = useState();
+   const [checkbox,setCheckbox]=useState(true);
   const addField = () => {
+    console.log(options)
     if (!title.trim()) return setErr("Title is required");
     if (title.trim().length < 4)
       return setErr("Title should be atleast 4 characters long");
@@ -34,6 +35,7 @@ function AddMultiOptionField({ inputType, add, close }) {
   const addOption = () => {
     if (!option.content.trim()) return setOpterr("Option is required");
     let _opts = [...options];
+    console.log(option)
     _opts.push(option);
     setOption("");
     setOptions(_opts);
@@ -47,9 +49,7 @@ function AddMultiOptionField({ inputType, add, close }) {
         <label>Enter field title</label>
         <input
           type="text"
-          placeholder={`Eg. Select your ${
-            inputType === "moma" ? "skills" : "gender"
-          }`}
+          placeholder={`Eg. Enter the question`}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
@@ -62,6 +62,12 @@ function AddMultiOptionField({ inputType, add, close }) {
                 type={inputType === "mosa" ? "radio" : "checkbox"}
                 className="mr-1"
                 name="inputs"
+                onChange={()=>{
+                  setCheckbox(!checkbox)
+                  opt.isCorrect=checkbox
+                  setCheckbox(checkbox)
+                  console.log(opt)
+                }}
               />
               <label>{opt.content}</label>
             </div>
@@ -73,16 +79,18 @@ function AddMultiOptionField({ inputType, add, close }) {
           type="text"
           className="mb-1"
           placeholder="Enter a option"
-          onChange={(e) =>
+          onChange={(e) =>{
             setOption({
               id: options.length,
               content: e.target.value,
-            })
+              isCorrect:false,
+              isMarked:false
+            })}
           }
           ref={inputRef}
         />
         {opterr && <p className="err mb-1 text-small">{opterr}</p>}
-        <button class="btn" onClick={addOption}>
+        <button className="btn" onClick={addOption}>
           Add Option
         </button>
       </div>
@@ -90,7 +98,6 @@ function AddMultiOptionField({ inputType, add, close }) {
         <label>Required: </label>
         <input type="checkbox" onChange={() => setRequired(!required)} />
       </div>
-      {/* yaha mera code hai */}
       <div className="input inline">
         <label>Correct Ans: </label>
         <input type="number" value={correctAns} onChange={(e) => setCorrectAns(e.target.value)} />

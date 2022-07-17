@@ -9,17 +9,12 @@ function FormSettings() {
   const [forms, setForms] = useState([]);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(true);
-  // current admin object
   const { currentUser } = useAuth();
   useEffect(() => {
-    // if(!localStorage.getItem('gfc-user')) return
     const fetchData = async () => {
       try {
-        // get all the forms for this user id
         let forms = await getForms("OK");
-
         setForms(forms);
-        // console.log(forms);
         setLoading(false);
       } catch (e) {
         setLoading(false);
@@ -61,12 +56,3 @@ function FormSettings() {
 
 export default FormSettings;
 
-// import React from 'react'
-
-// function FormSettings() {
-//   return (
-//     <div>FormSettings</div>
-//   )
-// }
-
-// export default FormSettings

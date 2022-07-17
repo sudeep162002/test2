@@ -8,10 +8,16 @@ export const updateObjState = (setter, model, prop, val) => {
 export const updateArrOfObjState = (setter, model, index, prop, val) => {
   let _model = [...model];
   _model[index] = Object.assign({}, _model[index], { [prop]: val });
+  let flag=false;
+
+  val.forEach(element => {
+    _model[index].options[element].isMarked=!(_model[index].options[element].isMarked)
+  });
+  console.log(_model[index].options)
+  console.log("============")
   setter(_model);
 };
 
-//toggles an item in array
 export const arrayToggle = (arr, item) => {
   let idx = arr.indexOf(item);
   if (idx > -1) {
@@ -46,20 +52,11 @@ export const createFillableModel = (model) => {
 
   for (let question in questions) {
     let fld = questions[question];
-    // console.log(fld);
-    // let fieldModel = {
-    //     title: fld.title,
-    //     required: fld.required,
-    //     type: fld.type,
-    //     value: fld.type === "multioption-singleanswer" || fld.type === "multioption-multianswer" ? [] : ""
-    // }
-    // fillableModel.push(fieldModel)
     fillableModel.push({
       ...fld,
       value: fld.type === "mosa" || fld.type === "moma" ? [] : "",
     });
   }
-  // console.log(fillableModel);
   return fillableModel;
 };
 
@@ -73,11 +70,6 @@ export const createSubmitableModel = (questions, userName, adminId, formId) => {
     fld.formId = formId;
     if (!fld.value || fld.value.length < 1) continue;
 
-    // let fieldModel = {
-    //   title: fld.title,
-    //   value: fld.value,
-    //   type: fld.type,
-    // };
     submitableModel.push(fld);
   }
   return submitableModel;
