@@ -11,6 +11,7 @@ function StudentChart(props) {
   ]);
   function getData() {
     let data = [];
+    console.log("STUDENT CHART DATA", props.data);
     const a = props.data.find((d) => d.username === props.studentName);
     data.push([a.totalQuestions, a.totalMarks, a.correctAns, a.wrongAns]);
     return data;

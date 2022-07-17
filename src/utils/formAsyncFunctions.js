@@ -27,7 +27,6 @@ export const getForms = async (id) => {
 };
 
 export const getForm = async (adminId, formId) => {
-
   const docRef = doc(firestore, "admin", adminId, "forms", formId);
   const docSnap = await getDoc(docRef);
 
@@ -65,9 +64,7 @@ export const getSubmissions = async (opts) => {
 };
 
 export const getFormData = async (formId, adminId) => {
-  const q = query(
-    collection(firestore, "submissions")
-  );
+  const q = query(collection(firestore, "submissions"));
   const querySnapshot = await getDocs(q);
   let data = [];
   querySnapshot.forEach((doc) => {
@@ -80,10 +77,10 @@ export const getFormData = async (formId, adminId) => {
   return data;
 };
 
-export const getIndividualStatisticalData = (formData) => {
+export const getIndividualStatisticalData = async (formData) => {
   console.log("FORM DATA", formData);
-  let totalQuestions=0
-  let finalData=[];
+  let totalQuestions = 0;
+  let finalData = [];
   let userName;
    Object.entries(formData).map((user) => {
       //console.log("Each User", user[1]);
@@ -113,13 +110,23 @@ export const getIndividualStatisticalData = (formData) => {
           finalData.push({"username":userName,"totalQuestions": totalQuestions,"totalMarks":totalAttempted,"correctAns":totalCorrect,"worongAns":totalIncorrect});
           // finalData.push(d);
       });
-      console.log("Total Questions",totalQuestions);
-      console.log("All User Details", finalData);
-      return finalData;
-    })
+      //Store totalQuestion and correctAns for every user
+      finalData.push({
+        username: userName,
+        totalQuestions: totalQuestions,
+        totalAttempted: totalAttempted,
+        totalCorrect: totalCorrect,
+        totalIncorrect: totalIncorrect,
+      });
+      // finalData.push(d);
+    });
+    console.log("Total Questions", totalQuestions);
+    console.log("All User Details", finalData);
+    return finalData;
+  });
 };
 
-export const getAllStatisticalData = (formData) => {
+export const getAllStatisticalData = async (formData) => {
   let allUserData = getIndividualStatisticalData(formData);
   let allRanges = {
     0: 0,
@@ -142,7 +149,6 @@ export const getAllStatisticalData = (formData) => {
     let relativeMarks=parseInt(((correctMarks*100)/totalQuestions)/10)*10
     allRanges[relativeMarks]++
   });
-  console.log("All Ranges here",allRanges)
+  console.log("All Ranges here", allRanges);
   return allRanges;
 };
-
