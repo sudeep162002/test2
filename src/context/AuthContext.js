@@ -31,7 +31,6 @@ export function AuthProvider({ children }) {
         const user = userCred.user;
         if (user) {
           await updateProfile(user, { displayName: name });
-          console.log(user);
         }
       }
     );

@@ -15,7 +15,6 @@ function AdminDashboard() {
         let forms = await getForms(currentUser.uid);
 
         setForms(forms);
-        console.log(forms);
         setLoading(false);
       } catch (e) {
         setLoading(false);

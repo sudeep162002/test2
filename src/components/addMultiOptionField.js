@@ -15,7 +15,6 @@ function AddMultiOptionField({ inputType, add, close, isMosa }) {
   const [option, setOption] = useState();
    const [checkbox,setCheckbox]=useState(true);
   const addField = () => {
-    console.log(options)
     if (!title.trim()) return setErr("Title is required");
     if (title.trim().length < 4)
       return setErr("Title should be atleast 4 characters long");
@@ -35,7 +34,6 @@ function AddMultiOptionField({ inputType, add, close, isMosa }) {
   const addOption = () => {
     if (!option.content.trim()) return setOpterr("Option is required");
     let _opts = [...options];
-    console.log(option)
     _opts.push(option);
     setOption("");
     setOptions(_opts);
@@ -66,7 +64,6 @@ function AddMultiOptionField({ inputType, add, close, isMosa }) {
                   setCheckbox(!checkbox)
                   opt.isCorrect=checkbox
                   setCheckbox(checkbox)
-                  console.log(opt)
                 }}
               />
               <label>{opt.content}</label>

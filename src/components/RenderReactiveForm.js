@@ -55,7 +55,6 @@ function RenderReactiveForm({  model, onSubmitted }) {
      if(checkFormExistence(model.formId,model.adminId)===true){
       try {
         await submitForm(submitableModel, model.adminId, model.formId);
-        console.log("pohocha");
         setLoading(false);
         onSubmitted();
       } catch (e) {
@@ -64,7 +63,6 @@ function RenderReactiveForm({  model, onSubmitted }) {
       }
      }else{
       setExists(false)
-      console.log("heyyy");
      }
   };
    

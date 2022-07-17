@@ -12,9 +12,7 @@ import {
 } from "../../utils/formAsyncFunctions";
 
 function FormAnalytics() {
-  console.log("/////////////////////////////////")
   const { formId } = useParams();
-  console.log(formId);
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
@@ -29,17 +27,12 @@ function FormAnalytics() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        console.log("CURRENT USER", currentUser.uid);
         let formData = await getFormData(formId, currentUser.uid);
-        console.log("DATA FETCHED!!");
         const aData = await getAllStatisticalData(formData);
-        console.log("ADATA", aData);
         const iData = await getIndividualStatisticalData(formData);
-        console.log("IDATA", iData);
         setIndividualStasticalData(iData);
         setAllStasticalData(aData);
         setFormData(formData);
-        console.log(formData);
         setLoading(false);
       } catch (e) {
         setLoading(false);

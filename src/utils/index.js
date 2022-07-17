@@ -13,8 +13,6 @@ export const updateArrOfObjState = (setter, model, index, prop, val) => {
   val.forEach(element => {
     _model[index].options[element].isMarked=!(_model[index].options[element].isMarked)
   });
-  console.log(_model[index].options)
-  console.log("============")
   setter(_model);
 };
 
@@ -48,7 +46,6 @@ export const expired = (createDateMillis, hours) => {
 export const createFillableModel = (model) => {
   let fillableModel = [];
   let questions = model.questions;
-  console.log("Model", model);
 
   for (let question in questions) {
     let fld = questions[question];
@@ -62,7 +59,6 @@ export const createFillableModel = (model) => {
 
 export const createSubmitableModel = (questions, userName, adminId, formId) => {
   let submitableModel = [];
-  console.log(questions);
   for (let question in questions) {
     let fld = questions[question];
     fld.userName = userName;
@@ -77,7 +73,6 @@ export const createSubmitableModel = (questions, userName, adminId, formId) => {
 
 export const hasError = (fields) => {
   for (let field of fields) {
-    console.log("Field", field);
     if (!field.required && !field.value) continue;
 
     if (
