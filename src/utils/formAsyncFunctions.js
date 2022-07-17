@@ -123,8 +123,7 @@ export const getIndividualStatisticalData = async (formData) => {
     console.log("Total Questions", totalQuestions);
     console.log("All User Details", finalData);
     return finalData;
-  });
-};
+  };
 
 export const getAllStatisticalData = async (formData) => {
   let allUserData = getIndividualStatisticalData(formData);
