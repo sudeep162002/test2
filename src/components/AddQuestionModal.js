@@ -43,7 +43,6 @@ function AddQuestionModal(props) {
   const addOption = () => {
     setOptions((prev) => [...prev, { id: prev.length + 1, content: option }]);
     setOption("");
-    console.log(options);
   };
   return (
     <ThemeWrapper>

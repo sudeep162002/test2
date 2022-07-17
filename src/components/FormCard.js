@@ -22,7 +22,7 @@ function FormCard({ form, onDelete }) {
   };
 
   return (
-    <div className="card" style={{padding:"2em 1em 2em 1em",boxShadow:"none",border:"2px solid #8700f5"}}>
+    <div className="card" style={{ backgroundColor:"white",padding:"2em 1em 2em 1em",boxShadow:"none",border:"2px solid #8700f5"}}>
       <p className="card-date" style={{fontSize:"1em",textAlign:"right",marginBottom:"2em"}}>{getDateFromMillis(form.createdAt)}</p>
       <h2 className="title mb-1" style={{color:"white",letterSpacing:"0.1em",fontWeight:"normal"}}>
         <span>{form.title}</span>

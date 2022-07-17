@@ -1,7 +1,6 @@
 import React from "react";
 
 function RenderPlainForm({ model }) {
-  console.log(model);
   return (
     <div className="grey-container mb-1" style={{ borderRadius: "5px" }}>
       <h1
