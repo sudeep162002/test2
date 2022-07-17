@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import BarChart from "../../components/BarChart";
+import StudentChart from "../../components/StudentChart";
+import StudentList from "../../components/StudentList";
 import { useAuth } from "../../context/AuthContext";
 import {
   getFormData,
@@ -15,15 +18,21 @@ function FormAnalytics() {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
   const [formData, setFormData] = useState();
+  const [individualStatisticalData, setIndividualStasticalData] = useState(
+    null
+  );
+  const [allStatisticalData, setAllStasticalData] = useState(null);
+  const [allForm, setAllForm] = useState(true);
+  const [studentName, setStudentName] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         console.log(currentUser.uid);
         let formData = await getFormData(formId, currentUser.uid);
-
+        setIndividualStasticalData(getIndividualStatisticalData(formData));
+        setAllStasticalData(getAllStatisticalData(formData));
         setFormData(formData);
-        getAllStatisticalData(formData);
         console.log(formData);
         setLoading(false);
       } catch (e) {
@@ -35,12 +44,43 @@ function FormAnalytics() {
   }, [currentUser, formId]);
 
   return (
-    <div style={{ backgroundColor: "blue" }}>
-      <div>
+    <div>
+      {/* <div>
         <h3>Total Submissions</h3>
         {formData ? <h1>{formData.length}</h1> : 0}
       </div>
-      <div></div>
+       */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          backgroundColor: "white",
+        }}
+      >
+        <div>
+          {allForm && allStatisticalData && (
+            <BarChart data={allStatisticalData} />
+          )}
+          {!allForm && individualStatisticalData && (
+            <StudentChart
+              studentName={studentName}
+              data={individualStatisticalData}
+            />
+          )}
+        </div>
+        <div>
+          {individualStatisticalData && (
+            <StudentList
+              allForm={allForm}
+              studentName={studentName}
+              setAllForm={setAllForm}
+              setStudentName={setStudentName}
+              data={individualStatisticalData}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
