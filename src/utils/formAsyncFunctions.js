@@ -77,49 +77,63 @@ export const getFormData = async (formId, adminId) => {
   return data;
 };
 
-export const getIndividualStatisticalData = async (formData) => {
+export const getIndividualStatisticalData = (formData) => {
   console.log("FORM DATA", formData);
   let totalQuestions = 0;
   let finalData = [];
   let userName;
-  await Object.entries(formData).map((user) => {
-    //console.log("Each User", user[1]);
-    let correctAns = 0;
-    let totalUserMarks = 0;
-    let totalAttempted=0,
-      totalCorrect = 0,
-      totalIncorrect = 0,
-      totalQuestions = 0;
-    //For each question
-    Object.entries(user[1]).map((question) => {
-      userName = question[1].userName;
-      totalQuestions += 1;
-
-      Object.entries(question[1].options).map((option) => {
-        if (option.isMarked === true) {
-          totalAttempted++;
-        }
-        if (option.isCorrect == option.isMarked) {
-          totalCorrect++;
-        } else if (option.isMarked) {
-          totalIncorrect++;
-        }
+   Object.entries(formData).map((user) => {
+      //console.log("Each User", user[1]);
+      let correctAns=0;
+      let totalUserMarks=0;
+      let totalAttempted=0,totalCorrect=0, totalIncorrect=0,totalQuestions=0,totalMarks=0;
+      //For each question
+      Object.entries(user[1]).map((question) => {
+          userName=question[1].userName
+          totalQuestions+=1;
+          console.log("Question ",question,"OOO",question[1])
+          let ansCorrect=0
+          let isAttempted=0,isIncorrect=0
+          Object.entries(question[1].options).map((option) => {
+            console.log("Visualize",option[1].isMarked,option[1].isCorrect)
+                if(option[1].isMarked===true)
+                {
+                  isAttempted=1
+                }
+                if(option[1].isCorrect===true && option[1].isMarked===false)
+                {
+                  console.log("sdfdf")
+                  isIncorrect=1
+                }
+                if(option[1].isCorrect===false && option[1].isMarked===true)
+                {
+                  console.log("ffff")
+                  isIncorrect=1
+                }
+          });
+          if(isAttempted===1)
+          {
+            totalAttempted++
+          }
+          if(isIncorrect===0)
+          {
+            totalMarks+=parseInt(question[1].positiveMarks)
+            totalIncorrect++
+          }
+          else
+          {
+            totalMarks+=parseInt(question[1].negativeMarks)
+            totalCorrect++
+          }
+          console.log(isAttempted,isIncorrect,question[1].positiveMarks,question[1].negativeMarks)
+          console.log(totalCorrect,totalIncorrect,totalAttempted,totalMarks)
       });
-      //Store totalQuestion and correctAns for every user
-      finalData.push({
-        username: userName,
-        totalQuestions: totalQuestions,
-        totalAttempted: totalAttempted,
-        totalCorrect: totalCorrect,
-        totalIncorrect: totalIncorrect,
-      });
-      // finalData.push(d);
+      finalData.push({"username":userName,"totalQuestions": totalQuestions,"totalAttempted":totalAttempted,"totalMarks":totalMarks,"correctAns":totalCorrect,"wrongAns":totalIncorrect});
     });
     console.log("Total Questions", totalQuestions);
     console.log("All User Details", finalData);
     return finalData;
-  });
-};
+  };
 
 export const getAllStatisticalData = async (formData) => {
   let allUserData = getIndividualStatisticalData(formData);
@@ -136,12 +150,15 @@ export const getAllStatisticalData = async (formData) => {
     90: 0,
     100: 0,
   };
-  await Object.entries(allUserData).map((user) => {
-    let totalQuestions = user[1].totalQuestions;
-    let correctMarks = user[1].totalCorrect;
-    let relativeMarks =
-      parseInt((correctMarks * 100) / totalQuestions / 10) * 10;
-    allRanges[relativeMarks]++;
+  console.log("===========5==",allUserData)
+  Object.entries(allUserData).map((user) => {
+    console.log("=======",user[1],user[2])
+
+    let totalQuestions=user[1].totalQuestions
+    let correctMarks=user[1].correctAns
+    let relativeMarks=parseInt(((correctMarks*100)/totalQuestions)/10)*10
+    if(relativeMarks>0)
+    allRanges[relativeMarks]++
   });
   console.log("All Ranges here", allRanges);
   return allRanges;

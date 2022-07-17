@@ -12,6 +12,7 @@ import {
 } from "../../utils/formAsyncFunctions";
 
 function FormAnalytics() {
+  console.log("/////////////////////////////////")
   const { formId } = useParams();
   console.log(formId);
   const { currentUser } = useAuth();
