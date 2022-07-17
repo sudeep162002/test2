@@ -149,6 +149,7 @@ export const getAllStatisticalData = async (formData) => {
     80: 0,
     90: 0,
     100: 0,
+    110:0
   };
   console.log("===========5==",allUserData)
   Object.entries(allUserData).map((user) => {
@@ -156,8 +157,11 @@ export const getAllStatisticalData = async (formData) => {
 
     let totalQuestions=user[1].totalQuestions
     let correctMarks=user[1].correctAns
-    let relativeMarks=parseInt(((correctMarks*100)/totalQuestions)/10)*10
-    if(relativeMarks>0)
+    if(correctMarks<0)
+    {
+      allRanges[0]++
+    }
+    let relativeMarks=(parseInt(((correctMarks*100)/totalQuestions)/10)*10)+10
     allRanges[relativeMarks]++
   });
   console.log("All Ranges here", allRanges);
