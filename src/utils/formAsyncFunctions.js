@@ -89,14 +89,14 @@ export const getIndividualStatisticalData = (formData) => {
       //console.log("Each User", user[1]);
       let correctAns=0;
       let totalUserMarks=0;
-      let totalAttempted,totalCorrect=0, totalIncorrect=0,totalQuestions=0;
+      let totalAttempted=0,totalCorrect=0, totalIncorrect=0,totalQuestions=0;
       //For each question
       Object.entries(user[1]).map((question) => {
           userName=question[1].userName
           totalQuestions+=1;
-
+          console.log("Question ",question,"OOO",question[1])
           Object.entries(question[1].options).map((option) => {
-                if(option.isMarked)
+                if(option.isMarked===true)
                 {
                   totalAttempted++;
                 }
@@ -108,8 +108,9 @@ export const getIndividualStatisticalData = (formData) => {
                   totalIncorrect++;
                 }
           });
+          console.log("Sddsdsd",{"username":userName,"totalQuestions": totalQuestions,"totalAttempted":totalAttempted,"totalCorrect":totalCorrect,"totalIncorrect":totalIncorrect})
           //Store totalQuestion and correctAns for every user
-          finalData.push({"username":userName,"totalQuestions": totalQuestions,"totalAttempted":totalAttempted,"totalCorrect":totalCorrect,"totalIncorrect":totalIncorrect});
+          finalData.push({"username":userName,"totalQuestions": totalQuestions,"totalMarks":totalAttempted,"correctAns":totalCorrect,"worongAns":totalIncorrect});
           // finalData.push(d);
       });
       console.log("Total Questions",totalQuestions);
@@ -133,6 +134,7 @@ export const getAllStatisticalData = (formData) => {
     90: 0,
     100: 0,
   };
+  console.log("=============",formData)
   Object.entries(allUserData).map((user) => {
 
     let totalQuestions=user[1].totalQuestions
