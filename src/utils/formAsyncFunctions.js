@@ -115,53 +115,49 @@ export const getIndividualStatisticalData = (formData) => {
   //For each user
    Object.entries(formData).map((user) => {
       //console.log("Each User", user[1]);
-      let d = [];
-      totalQuestions=0;
       let correctAns=0;
       let totalUserMarks=0;
+      let totalAttempted,totalCorrect=0, totalIncorrect=0,totalQuestions=0;
       //For each question
       Object.entries(user[1]).map((question) => {
           userName=question[1].userName
-          d.push(question[1])
           totalQuestions+=1;
-          //console.log(question[1].correctAns-1,question[1].value[0],"dddddd")
-          let positiveMarks=parseInt(question[1].positiveMarks)
-          let negativeMarks=parseInt(question[1].negativeMarks)
-          if(question[1].correctAns-1==-1)
-          {
-              totalUserMarks+=0 
-          }
-          else if((question[1].correctAns-1)==question[1].value[0])
-          {
-            totalUserMarks+=positiveMarks
-            correctAns+=1;
-          }
-          else
-          {
-            totalUserMarks+=negativeMarks
-          }
+
+          Object.entries(question[1].options).map((option) => {
+                if(option.isMarked)
+                {
+                  totalAttempted++;
+                }
+                if(option.isCorrect==option.isMarked)
+                {
+                  totalCorrect++;
+                }
+                else{
+                  totalIncorrect++;
+                }
+          });
+          //Store totalQuestion and correctAns for every user
+          finalData.push({"username":userName,"totalQuestions": totalQuestions,"totalAttempted":totalAttempted,"totalCorrect":totalCorrect,"totalIncorrect":totalIncorrect});
+          // finalData.push(d);
       });
-      //Store totalQuestion and correctAns for every user
-      finalData.push({"username":userName,"totalQuestions": totalQuestions,"totalMarks":totalUserMarks,"correctAns":correctAns});
-      // finalData.push(d);
-  });
-  console.log("Total Questions",totalQuestions)
-  console.log("All User Details", finalData);
-  return finalData;
+      console.log("Total Questions",totalQuestions);
+      console.log("All User Details", finalData);
+      return finalData;
+    })
 };
 
 export const getAllStatisticalData = (formData) => {
   let allUserData=getIndividualStatisticalData(formData)
   let allRanges={0:0,10:0,20:0,30:0,40:0,50:0,60:0,70:0,80:0,90:0,100:0}
   Object.entries(allUserData).map((user) => {
-    
+
     let totalQuestions=user[1].totalQuestions
-    let correctMarks=user[1].correctAns
+    let correctMarks=user[1].totalCorrect
     let relativeMarks=parseInt(((correctMarks*100)/totalQuestions)/10)*10
     //console.log("correct",correctMarks,"totalQuestions",totalQuestions,"relativeMarks",relativeMarks)
     allRanges[relativeMarks]++
   });
-  console.log("All Ranges here",allRanges) 
+  console.log("All Ranges here",allRanges)
   return allRanges;
 };
 export const getTotalMarks = (formData) => {
