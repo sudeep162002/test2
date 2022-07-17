@@ -21,10 +21,7 @@ function App() {
           <Header />
           <Switch>
             {/* <Route path="/submissions/:formId"  component={FormAnalytics}/> */}
-            <Route
-              path="/admin/:adminId/form/:formId"
-              component={FormAnalytics}
-            />
+            <PrivateRoute path="/analytics/:formId" component={FormAnalytics} />
             <Route path="/fill/:adminId/:id" component={Fill} />
             <FreeRoute exact path="/" component={Home} />
             <FreeRoute path="/login" component={Login} />

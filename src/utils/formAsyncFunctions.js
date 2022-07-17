@@ -67,10 +67,10 @@ export const uploadFile = (file, fileName) => {
 };
 
 export const submitForm = async (submission, adminId, formId) => {
-  console.log("ye naya hai")
+  console.log("ye naya hai");
   console.log(submission);
-  let allAnswers={...submission}
-  const cityRef = collection(firestore,"submissions");
+  let allAnswers = { ...submission };
+  const cityRef = collection(firestore, "submissions");
   return addDoc(cityRef, allAnswers);
 };
 
@@ -82,38 +82,43 @@ export const getSubmissions = async (opts) => {
   return submissions;
 };
 
-
 // function to get form data for analytics
-export const getFormData=async (formId,adminId)=>{ 
+export const getFormData = async (formId, adminId) => {
   // ek form ka saara data aa jaega isse
-const q = query(collection(firestore, "submissions"), where("formId", "==", formId),where("adminId","==",adminId));
-const querySnapshot = await getDocs(q);
-// console.log(querySnapshot)
-let data=[];
-let count=0;
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  data.push(doc.data());
-  // console.log(doc.id, " => ", doc.data());
-});
+  const q = query(
+    collection(firestore, "submissions")
+    // where("formId", "==", formId),
+    // where("adminId", "==", adminId)
+  );
+  const querySnapshot = await getDocs(q);
+  // console.log(querySnapshot)
+  let data = [];
+  // let count = 0;
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.data());
+    data.push(doc.data());
 
+    console.log(doc.id, " => ", doc.data());
+  });
+  data = data.filter((e) => e[0].formId === formId && e[0].adminId === adminId);
   return data;
-}
+};
 
-export const getStatisticalData=(formData)=>{
+export const getStatisticalData = (formData) => {
   // formData.forEach((doc) => {
   //   // doc.data() is never undefined for query doc snapshots
   //   // console.log(doc.id, " => ", doc.data());
   // });
   // console.log(formData)
   return 0;
-}
+};
 
-export const getTotalMarks=(formData)=>{
-  let marksArray=[];
+export const getTotalMarks = (formData) => {
+  let marksArray = [];
   // formData.forEach((user)=>{
   //   let marks=0;
   //   user.questions
   // })
-  console.log(formData)
-}
+  console.log(formData);
+};

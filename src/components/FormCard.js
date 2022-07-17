@@ -35,7 +35,7 @@ function FormCard({ form, onDelete }) {
         <span className="nav-item" onClick={() => setPreview(true)}>
           preview
         </span>
-        <Link to={`/admin/${currentUser.uid}/form/${form.id}`} className="nav-item" 
+        <Link to={`/analytics/${form.id}`} className="nav-item" 
         // onClick={handleClick}
         >
           submissions

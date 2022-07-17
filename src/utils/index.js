@@ -63,14 +63,14 @@ export const createFillableModel = (model) => {
   return fillableModel;
 };
 
-export const createSubmitableModel = (questions,userName,adminId,formId) => {
+export const createSubmitableModel = (questions, userName, adminId, formId) => {
   let submitableModel = [];
   console.log(questions);
   for (let question in questions) {
     let fld = questions[question];
-     fld.userName=userName
-     fld.adminId=adminId
-     fld.formId=formId
+    fld.userName = userName;
+    fld.adminId = adminId;
+    fld.formId = formId;
     if (!fld.value || fld.value.length < 1) continue;
 
     // let fieldModel = {
@@ -85,7 +85,8 @@ export const createSubmitableModel = (questions,userName,adminId,formId) => {
 
 export const hasError = (fields) => {
   for (let field of fields) {
-    if (!field.required && !field.value.trim()) continue;
+    console.log("Field", field);
+    if (!field.required && !field.value) continue;
 
     if (
       ["short-text", "long-text", "number", "file"].indexOf(field.type) > -1

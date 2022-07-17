@@ -15,20 +15,17 @@ import FileField from "./FileField";
 
 function RenderReactiveForm({ model, onSubmitted }) {
   const { currentUser } = useAuth();
-   const [userName,setUserName]=useState("");
+  const [userName, setUserName] = useState("");
   const [fillableModel, setFillableModel] = useState(
     createFillableModel(model)
   );
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-
-const handleNameChange= (e)=>{
-  setUserName(e.target.value);
-  console.log(userName)
-}
-
-
+  const handleNameChange = (e) => {
+    setUserName(e.target.value);
+    console.log(userName);
+  };
 
   const handleSubmit = async () => {
     setErr("");
@@ -38,12 +35,17 @@ const handleNameChange= (e)=>{
     if (error) return setErr(error);
 
     setLoading(true);
-    
-    let submitableModel = createSubmitableModel(fillableModel,userName,currentUser.uid,model.formId);
+
+    let submitableModel = createSubmitableModel(
+      fillableModel,
+      userName,
+      currentUser.uid,
+      model.formId
+    );
 
     try {
-      await submitForm(submitableModel,currentUser.uid, model.formId);
-      console.log("pohocha")
+      await submitForm(submitableModel, currentUser.uid, model.formId);
+      console.log("pohocha");
       setLoading(false);
       onSubmitted();
     } catch (e) {
@@ -54,7 +56,11 @@ const handleNameChange= (e)=>{
 
   return (
     <div className="main-form mt-1">
-      <input placeholder="Enter Your Name" value={userName}  onChange={handleNameChange}/>
+      <input
+        placeholder="Enter Your Name"
+        value={userName}
+        onChange={handleNameChange}
+      />
       {fillableModel.map((field, index) =>
         ["short-text", "number"].indexOf(field.type) > -1 ? (
           <div key={index} className="input">

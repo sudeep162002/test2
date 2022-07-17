@@ -1,21 +1,29 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getFormData,getStatisticalData,getTotalMarks } from "../../utils/formAsyncFunctions";
-
+import { useAuth } from "../../context/AuthContext";
+import {
+  getFormData,
+  getStatisticalData,
+  getTotalMarks,
+} from "../../utils/formAsyncFunctions";
 
 function FormAnalytics() {
-  const { adminId, formId } = useParams();
+  const { formId } = useParams();
+  console.log(formId);
+  const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
-  const [formData,setFormData]=useState();
+  const [formData, setFormData] = useState();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true)
-        let formData = await getFormData(formId,adminId);
-       
+        setLoading(true);
+        console.log(currentUser.uid);
+        let formData = await getFormData(formId, currentUser.uid);
+
         setFormData(formData);
-        getStatisticalData(formData);
+        // getStatisticalData(formData);
+        console.log(formData);
         setLoading(false);
       } catch (e) {
         setLoading(false);
@@ -23,20 +31,17 @@ function FormAnalytics() {
       }
     };
     fetchData();
-  }, [adminId,formId]);
-  
+  }, [currentUser, formId]);
 
   return (
-    <div style={{backgroundColor:"blue"}}>
+    <div style={{ backgroundColor: "blue" }}>
       <div>
-      <h3>Total Submissions</h3>
-      {formData?<h1>{formData.length}</h1>:0}
+        <h3>Total Submissions</h3>
+        {formData ? <h1>{formData.length}</h1> : 0}
       </div>
-      <div>
-
-      </div>
-      FormAnalytics</div>
-  )
+      <div></div>
+    </div>
+  );
 }
 
-export default FormAnalytics
+export default FormAnalytics;
