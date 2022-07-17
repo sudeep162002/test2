@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import {
   getFormData,
   getIndividualStatisticalData,
+  getAllStatisticalData,
   getTotalMarks,
 } from "../../utils/formAsyncFunctions";
 
@@ -22,7 +23,7 @@ function FormAnalytics() {
         let formData = await getFormData(formId, currentUser.uid);
 
         setFormData(formData);
-        getIndividualStatisticalData(formData);
+        getAllStatisticalData(formData);
         console.log(formData);
         setLoading(false);
       } catch (e) {

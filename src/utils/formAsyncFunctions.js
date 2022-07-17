@@ -107,58 +107,62 @@ export const getFormData = async (formId, adminId) => {
 };
 
 export const getIndividualStatisticalData = (formData) => {
-  // formData.forEach((doc) => {
-  //   // doc.data() is never undefined for query doc snapshots
-  //   // console.log(doc.id, " => ", doc.data());
-  // });
-  // let finalData = [];
-  // console.log("FORM DATA", formData);
-  // Object.entries(formData).map((item) => {
-  //   console.log("gggg", item[1]);
-  //   let d = [];
-  //   Object.entries(item[1]).map((data) => d.push(data[1]));
-  //   finalData.push(d);
-  // });
-  // console.log("FINAL DATA", finalData);
-  let finalData = [
-    {
-      username: "Manish",
-      correctMarks: 21,
-      totalMarks: 100,
-    },
-  ];
+  console.log("FORM DATA", formData);
+  let totalQuestions=0
+  //Stores data of All users
+  let finalData=[];
+  let userName;
+  //For each user
+   Object.entries(formData).map((user) => {
+      //console.log("Each User", user[1]);
+      let d = [];
+      totalQuestions=0;
+      let correctAns=0;
+      let totalUserMarks=0;
+      //For each question
+      Object.entries(user[1]).map((question) => {
+          userName=question[1].userName
+          d.push(question[1])
+          totalQuestions+=1;
+          //console.log(question[1].correctAns-1,question[1].value[0],"dddddd")
+          let positiveMarks=parseInt(question[1].positiveMarks)
+          let negativeMarks=parseInt(question[1].negativeMarks)
+          if(question[1].correctAns-1==-1)
+          {
+              totalUserMarks+=0 
+          }
+          else if((question[1].correctAns-1)==question[1].value[0])
+          {
+            totalUserMarks+=positiveMarks
+            correctAns+=1;
+          }
+          else
+          {
+            totalUserMarks+=negativeMarks
+          }
+      });
+      //Store totalQuestion and correctAns for every user
+      finalData.push({"username":userName,"totalQuestions": totalQuestions,"totalMarks":totalUserMarks,"correctAns":correctAns});
+      // finalData.push(d);
+  });
+  console.log("Total Questions",totalQuestions)
+  console.log("All User Details", finalData);
   return finalData;
 };
 
-export const getAllStatisticalData = () => {
-  let data = [
-    {
-      start:10,
-      end : 20,
-      count : 124
-    },
-    {
-      start:20,
-      end : 30,
-      count : 122
-    },
-    {
-      start:30,
-      end : 40,
-      count : 45
-    },
-    {
-      start:40,
-      end : 50,
-      count : 15
-    },
-    {
-      start:50,
-      end : 60,
-      count : 34
-    }
-  ]
-  return data;
+export const getAllStatisticalData = (formData) => {
+  let allUserData=getIndividualStatisticalData(formData)
+  let allRanges={0:0,10:0,20:0,30:0,40:0,50:0,60:0,70:0,80:0,90:0,100:0}
+  Object.entries(allUserData).map((user) => {
+    
+    let totalQuestions=user[1].totalQuestions
+    let correctMarks=user[1].correctAns
+    let relativeMarks=parseInt(((correctMarks*100)/totalQuestions)/10)*10
+    //console.log("correct",correctMarks,"totalQuestions",totalQuestions,"relativeMarks",relativeMarks)
+    allRanges[relativeMarks]++
+  });
+  console.log("All Ranges here",allRanges) 
+  return allRanges;
 };
 export const getTotalMarks = (formData) => {
   let marksArray = [];
