@@ -7,8 +7,8 @@ function StudentList(props) {
         <tr>
           <th>Username</th>
           <th>Correct Questions</th>
-          <th>Total Questions</th>
           <th>Marks Scored</th>
+          <th>Total Marks</th>
           <th>Show on Chart</th>
         </tr>
       </thead>
@@ -22,43 +22,40 @@ function StudentList(props) {
           </td>
           <td>
             {props.data
-              .map((d) => d.totalQuestions)
-              .reduce((prev, curr) => prev + curr, 0)}
-          </td>
-          <td>
-            {props.data
               .map((d) => d.totalMarks)
               .reduce((prev, curr) => prev + curr, 0)}
           </td>
           <td>
-            <div
-              onClick={() => {
+            {props.data
+              .map((d) => d.totalQuestions)
+              .reduce((prev, curr) => prev + curr, 0)}
+          </td>
+          <td>
+            <input
+              type="checkbox"
+              onChange={() => {
                 props.setStudentName(null);
                 props.setAllForm(true);
               }}
-            >
-              <input type="checkbox" checked={props.allForm} />
-            </div>
+              checked={props.allForm}
+            />
           </td>
         </tr>
         {props.data.map((d, idx) => (
           <tr key={idx}>
             <td>{d.username}</td>
             <td>{d.correctAns}</td>
-            <td>{d.totalQuestions}</td>
             <td>{d.totalMarks}</td>
+            <td>{d.totalQuestions}</td>
             <td>
-              <div
-                onClick={() => {
-                  props.setStudentName(d.username);
+              <input
+                type="checkbox"
+                onChange={() => {
                   props.setAllForm(false);
+                  props.setStudentName(d.username);
                 }}
-              >
-                <input
-                  type="checkbox"
-                  checked={d.username === props.studentName}
-                />
-              </div>
+                checked={d.username === props.studentName}
+              />
             </td>
           </tr>
         ))}

@@ -8,11 +8,10 @@ import {
   getFormData,
   getIndividualStatisticalData,
   getAllStatisticalData,
-  getTotalMarks,
 } from "../../utils/formAsyncFunctions";
 
 function FormAnalytics() {
-  console.log("/////////////////////////////////")
+  console.log("/////////////////////////////////");
   const { formId } = useParams();
   console.log(formId);
   const { currentUser } = useAuth();

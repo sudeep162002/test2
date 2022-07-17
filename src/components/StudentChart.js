@@ -3,21 +3,18 @@ import ReactApexChart from "react-apexcharts";
 
 function StudentChart(props) {
   console.log("PROPS", props);
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    function getData() {
-      let values = [];
-      console.log("STUDENT CHART DATA", props.data);
-      const a = props.data.find((d) => d.username === props.studentName);
-      values.push([a.totalQuestions, a.totalMarks, a.correctAns, a.wrongAns]);
-      return setData(values);
-    }
-    getData();
-  }, []);
+  function getData(studentName) {
+    console.log("STUDENT CHART DATA", props.data);
+    const a = props.data.find((d) => d.username === studentName);
+    let values = [a.totalQuestions, a.totalMarks, a.correctAns, a.wrongAns];
+    console.log("values", values);
+    return values;
+  }
+
   const [series] = useState([
     {
       name: "Students",
-      data: data,
+      data: getData(props.studentName),
     },
   ]);
 
@@ -100,7 +97,7 @@ function StudentChart(props) {
       },
     },
   });
-  return data ? (
+  return (
     <div style={{ backgroundColor: "white" }}>
       <ReactApexChart
         options={options}
@@ -110,8 +107,6 @@ function StudentChart(props) {
         width={600}
       />
     </div>
-  ) : (
-    "Loading......"
   );
 }
 
