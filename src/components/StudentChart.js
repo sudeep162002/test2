@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 function StudentChart(props) {
   console.log("PROPS", props);
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    function getData() {
+      let values = [];
+      console.log("STUDENT CHART DATA", props.data);
+      const a = props.data.find((d) => d.username === props.studentName);
+      values.push([a.totalQuestions, a.totalMarks, a.correctAns, a.wrongAns]);
+      return setData(values);
+    }
+    getData();
+  }, []);
   const [series] = useState([
     {
       name: "Students",
-      data: getData(),
+      data: data,
     },
   ]);
-  function getData() {
-    let data = [];
-    console.log("STUDENT CHART DATA", props.data);
-    const a = props.data.find((d) => d.username === props.studentName);
-    data.push([a.totalQuestions, a.totalMarks, a.correctAns, a.wrongAns]);
-    return data;
-  }
+
   const [options] = useState({
     chart: {
       height: 350,
@@ -51,7 +56,12 @@ function StudentChart(props) {
           color: "#444",
         },
       },
-      categories: ["correct", "incorrect", "not-attempted", "total questions"],
+      categories: [
+        "Total Questions",
+        "Total Marks",
+        "Correct Answer",
+        "Wrong Answers",
+      ],
       position: "top",
       axisBorder: {
         show: false,
@@ -72,7 +82,7 @@ function StudentChart(props) {
         },
       },
       tooltip: {
-        enabled: true,
+        enabled: false,
       },
     },
     yaxis: {
@@ -90,7 +100,7 @@ function StudentChart(props) {
       },
     },
   });
-  return (
+  return data ? (
     <div style={{ backgroundColor: "white" }}>
       <ReactApexChart
         options={options}
@@ -100,6 +110,8 @@ function StudentChart(props) {
         width={600}
       />
     </div>
+  ) : (
+    "Loading......"
   );
 }
 
