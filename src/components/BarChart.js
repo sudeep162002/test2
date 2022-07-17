@@ -15,8 +15,9 @@ function PieChart(props) {
     let data = [];
     const val = Object.entries(props.data).map((d) => parseInt(d[1]));
     console.log("Value", val);
-    for (let i = 0; i < 10; ++i) {
-      data.push(val[i] + val[i + 1]);
+    data.push(val[0])
+    for (let i = 0; i < 11; ++i) {
+      data.push(val[i + 1]);
     }
     console.log("DATA", data);
     return data;
@@ -58,6 +59,7 @@ function PieChart(props) {
         },
       },
       categories: [
+        "< 0",
         "0-10",
         "10-20",
         "20-30",

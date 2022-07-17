@@ -30,13 +30,15 @@ function StudentList(props) {
               .map((d) => d.totalMarks)
               .reduce((prev, curr) => prev + curr, 0)}
           </td>
-          <td
-            onClick={() => {
-              props.setStudentName(null);
-              props.setAllForm(true);
-            }}
-          >
-            <input type="checkbox" checked={props.allForm} />
+          <td>
+            <div
+              onClick={() => {
+                props.setStudentName(null);
+                props.setAllForm(true);
+              }}
+            >
+              <input type="checkbox" checked={props.allForm} />
+            </div>
           </td>
         </tr>
         {props.data.map((d, idx) => (
@@ -45,13 +47,18 @@ function StudentList(props) {
             <td>{d.correctAns}</td>
             <td>{d.totalQuestions}</td>
             <td>{d.totalMarks}</td>
-            <td
-              onClick={() => {
-                props.setStudentName(d.username);
-                props.setAllForm(false);
-              }}
-            >
-              <input type="checkbox" checked={d.username === props.studentName}/>
+            <td>
+              <div
+                onClick={() => {
+                  props.setStudentName(d.username);
+                  props.setAllForm(false);
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={d.username === props.studentName}
+                />
+              </div>
             </td>
           </tr>
         ))}
