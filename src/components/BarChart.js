@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 function PieChart(props) {
-  console.log("RRER", Object.entries(props.data));
 
   const [series] = useState([
     {
@@ -14,12 +13,10 @@ function PieChart(props) {
   function getData() {
     let data = [];
     const val = Object.entries(props.data).map((d) => parseInt(d[1]));
-    console.log("Value", val);
     data.push(val[0])
     for (let i = 0; i < 11; ++i) {
       data.push(val[i + 1]);
     }
-    console.log("DATA", data);
     return data;
   }
 

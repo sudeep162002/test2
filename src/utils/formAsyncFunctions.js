@@ -76,10 +76,8 @@ export const getIndividualStatisticalData = (formData) => {
       let correctAns=0;
       let totalUserMarks=0;
       let totalAttempted=0,totalCorrect=0, totalIncorrect=0,totalQuestions=0,totalMarks=0;
-      //For each question
       Object.entries(user[1]).map((question) => {
           userName=question[1].userName
-          //totalQuestions+=1;
           let ansCorrect=0
           let isAttempted=0,isIncorrect=0
           Object.entries(question[1].options).map((option) => {

@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 function StudentChart(props) {
-  console.log("PROPS", props);
   function getData(studentName) {
-    console.log("STUDENT CHART DATA", props.data);
     const a = props.data.find((d) => d.username === studentName);
     let values = [a.totalQuestions, a.totalMarks, a.correctAns, a.wrongAns];
-    console.log("values", values);
     return values;
   }
 
