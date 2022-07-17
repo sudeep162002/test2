@@ -21,6 +21,11 @@ function Fill() {
     const fetchData = async () => {
       try {
         let frm = await getForm(adminId, id);
+        if(!frm) {
+          setMsg("FORM DOES NOT EXIST")
+          setLoading(false)
+          return;
+        }
         frm.formId = id;
         frm.adminId = adminId;
         setForm(frm);

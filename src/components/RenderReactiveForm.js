@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
 import {
@@ -8,18 +8,30 @@ import {
   hasError,
 } from "../utils";
 
-import { submitForm } from "../utils/formAsyncFunctions";
+import { submitForm ,checkFormExistence} from "../utils/formAsyncFunctions";
 
 import MultiOptionField from "./MultiOptionField";
 import FileField from "./FileField";
 
-function RenderReactiveForm({ adminId, model, onSubmitted }) {
+function RenderReactiveForm({  model, onSubmitted }) {
   const [userName, setUserName] = useState("");
   const [fillableModel, setFillableModel] = useState(
     createFillableModel(model)
   );
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+ const [exists,setExists]=useState(true)
+
+
+ useEffect(() => {
+  if(checkFormExistence(model.formId,model.adminId)===true){
+    setExists(true)
+  }
+  else{
+    setExists(false)
+  }
+}, [model]);
+
 
   const handleNameChange = (e) => {
     setUserName(e.target.value);
@@ -40,20 +52,25 @@ function RenderReactiveForm({ adminId, model, onSubmitted }) {
       model.adminId,
       model.formId
     );
-
-    try {
-      await submitForm(submitableModel, model.adminId, model.formId);
-      console.log("pohocha");
-      setLoading(false);
-      onSubmitted();
-    } catch (e) {
-      setErr(e.message);
-      setLoading(false);
-    }
+     if(checkFormExistence(model.formId,model.adminId)===true){
+      try {
+        await submitForm(submitableModel, model.adminId, model.formId);
+        console.log("pohocha");
+        setLoading(false);
+        onSubmitted();
+      } catch (e) {
+        setErr(e.message);
+        setLoading(false);
+      }
+     }else{
+      setExists(false)
+      console.log("heyyy");
+     }
   };
-
+   
   return (
-    <div
+    
+      exists===true? <div
       className="main-form mt-1"
       style={{ width: "50%", paddingLeft: "2em" }}
     >
@@ -155,7 +172,8 @@ function RenderReactiveForm({ adminId, model, onSubmitted }) {
           <span>submit</span>
         )}
       </button>
-    </div>
+    </div>: <div>doesnt exist</div>
+    
   );
 }
 
