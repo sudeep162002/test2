@@ -45,7 +45,7 @@ function FormCard({ form, onDelete }) {
         <p className="btn mt-1 center primary-color">
           <a
             href={`${window.location.origin}/fill/${currentUser.uid}/${form.id}`}
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="link mb-1"
             target="_blank"
             style={{fontSize:"0.8em",fontWeight:"normal",padding:"0.4em 0.6em",marginTop:"1em"}}
