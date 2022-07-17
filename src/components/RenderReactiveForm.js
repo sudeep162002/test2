@@ -12,6 +12,7 @@ import { submitForm ,checkFormExistence} from "../utils/formAsyncFunctions";
 
 import MultiOptionField from "./MultiOptionField";
 import FileField from "./FileField";
+import { TryOutlined } from "@mui/icons-material";
 
 function RenderReactiveForm({  model, onSubmitted }) {
   const [userName, setUserName] = useState("");
@@ -24,12 +25,11 @@ function RenderReactiveForm({  model, onSubmitted }) {
 
 
  useEffect(() => {
-  if(checkFormExistence(model.formId,model.adminId)===true){
+  let x= checkFormExistence(model.formId,model.adminId);
+  if(x===true){
     setExists(true)
   }
-  else{
-    setExists(false)
-  }
+
 }, [model]);
 
 
