@@ -11,6 +11,7 @@ import {
   setDoc,
   addDoc,
 } from "firebase/firestore";
+import { letterSpacing } from "@mui/system";
 
 export const createForm = (adminId, formModel) => {
   // return firestore.collection("forms").add({...formModel, uid: uid})
@@ -105,15 +106,60 @@ export const getFormData = async (formId, adminId) => {
   return data;
 };
 
-export const getStatisticalData = (formData) => {
+export const getIndividualStatisticalData = (formData) => {
   // formData.forEach((doc) => {
   //   // doc.data() is never undefined for query doc snapshots
   //   // console.log(doc.id, " => ", doc.data());
   // });
-  // console.log(formData)
-  return 0;
+  // let finalData = [];
+  // console.log("FORM DATA", formData);
+  // Object.entries(formData).map((item) => {
+  //   console.log("gggg", item[1]);
+  //   let d = [];
+  //   Object.entries(item[1]).map((data) => d.push(data[1]));
+  //   finalData.push(d);
+  // });
+  // console.log("FINAL DATA", finalData);
+  let finalData = [
+    {
+      username: "Manish",
+      correctMarks: 21,
+      totalMarks: 100,
+    },
+  ];
+  return finalData;
 };
 
+export const getAllStatisticalData = () => {
+  let data = [
+    {
+      start:10,
+      end : 20,
+      count : 124
+    },
+    {
+      start:20,
+      end : 30,
+      count : 122
+    },
+    {
+      start:30,
+      end : 40,
+      count : 45
+    },
+    {
+      start:40,
+      end : 50,
+      count : 15
+    },
+    {
+      start:50,
+      end : 60,
+      count : 34
+    }
+  ]
+  return data;
+};
 export const getTotalMarks = (formData) => {
   let marksArray = [];
   // formData.forEach((user)=>{

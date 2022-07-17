@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import {
   getFormData,
-  getStatisticalData,
+  getIndividualStatisticalData,
   getTotalMarks,
 } from "../../utils/formAsyncFunctions";
 
@@ -22,7 +22,7 @@ function FormAnalytics() {
         let formData = await getFormData(formId, currentUser.uid);
 
         setFormData(formData);
-        // getStatisticalData(formData);
+        getIndividualStatisticalData(formData);
         console.log(formData);
         setLoading(false);
       } catch (e) {
