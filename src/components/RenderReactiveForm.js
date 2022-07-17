@@ -13,8 +13,7 @@ import { submitForm } from "../utils/formAsyncFunctions";
 import MultiOptionField from "./MultiOptionField";
 import FileField from "./FileField";
 
-function RenderReactiveForm({ model, onSubmitted }) {
-  const { currentUser } = useAuth();
+function RenderReactiveForm({ adminId, model, onSubmitted }) {
   const [userName, setUserName] = useState("");
   const [fillableModel, setFillableModel] = useState(
     createFillableModel(model)
@@ -38,12 +37,12 @@ function RenderReactiveForm({ model, onSubmitted }) {
     let submitableModel = createSubmitableModel(
       fillableModel,
       userName,
-      currentUser.uid,
+      model.adminId,
       model.formId
     );
 
     try {
-      await submitForm(submitableModel, currentUser.uid, model.formId);
+      await submitForm(submitableModel, model.adminId, model.formId);
       console.log("pohocha");
       setLoading(false);
       onSubmitted();
@@ -54,14 +53,25 @@ function RenderReactiveForm({ model, onSubmitted }) {
   };
 
   return (
-    <div className="main-form mt-1" style={{width:"50%",paddingLeft:"2em"}}>
+    <div
+      className="main-form mt-1"
+      style={{ width: "50%", paddingLeft: "2em" }}
+    >
       <div>
-      <input 
-      style={{outline:"none", border:"3px solid #8700f5",height:"3em",width:"40%",backgroundColor:"#fffff",marginBottom:"3em",borderRadius:"0.5em"}}
-        placeholder="Enter Your Name"
-        value={userName}
-        onChange={handleNameChange}
-      />
+        <input
+          style={{
+            outline: "none",
+            border: "3px solid #8700f5",
+            height: "3em",
+            width: "40%",
+            backgroundColor: "#fffff",
+            marginBottom: "3em",
+            borderRadius: "0.5em",
+          }}
+          placeholder="Enter Your Name"
+          value={userName}
+          onChange={handleNameChange}
+        />
       </div>
       {fillableModel.map((field, index) =>
         ["short-text", "number"].indexOf(field.type) > -1 ? (
@@ -105,15 +115,15 @@ function RenderReactiveForm({ model, onSubmitted }) {
           <MultiOptionField
             key={index}
             fieldModel={field}
-            onSelected={(res) =>{
+            onSelected={(res) => {
               updateArrOfObjState(
                 setFillableModel,
                 fillableModel,
                 index,
                 "value",
                 res
-              )}
-            }
+              );
+            }}
           />
         ) : field.type === "file" ? (
           <FileField
@@ -134,7 +144,11 @@ function RenderReactiveForm({ model, onSubmitted }) {
         )
       )}
       {err && <p className="err mb-1">{err}</p>}
-      <button className="btn" style={{marginTop:"2em"}} onClick={handleSubmit}>
+      <button
+        className="btn"
+        style={{ marginTop: "2em" }}
+        onClick={handleSubmit}
+      >
         {loading ? (
           <span className="spinner white"></span>
         ) : (

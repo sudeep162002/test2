@@ -21,7 +21,8 @@ function Fill() {
     const fetchData = async () => {
       try {
         let frm = await getForm(adminId, id);
-        frm.formId=id
+        frm.formId = id;
+        frm.adminId = adminId;
         setForm(frm);
         setLoading(false);
       } catch (e) {
@@ -34,7 +35,17 @@ function Fill() {
 
   return (
     <div>
-      <h1 className="heading" style={{color:"white",margin:"2em 0",fontWeight:"normal",letterSpacing:"1px"}}>{form ? form.title : "Fill in the form"}</h1>
+      <h1
+        className="heading"
+        style={{
+          color: "white",
+          margin: "2em 0",
+          fontWeight: "normal",
+          letterSpacing: "1px",
+        }}
+      >
+        {form ? form.title : "Fill in the form"}
+      </h1>
       {loading ? (
         <p className="text-center mt-1">
           <span className="spinner"></span>
