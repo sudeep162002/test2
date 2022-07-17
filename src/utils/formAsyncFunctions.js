@@ -132,7 +132,7 @@ export const getIndividualStatisticalData = (formData) => {
                 {
                   totalCorrect++;
                 }
-                else{
+                else if(option.isMarked){
                   totalIncorrect++;
                 }
           });
