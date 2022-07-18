@@ -31,7 +31,7 @@ export const getForm = async (adminId, formId) => {
 
   if (docSnap.exists()) {
   } else {
-    return null
+    return null;
   }
   return docSnap.data();
 };
@@ -62,8 +62,7 @@ export const getFormData = async (formId, adminId) => {
   const q = query(collection(firestore, "submissions"));
   const querySnapshot = await getDocs(q);
   let data = [];
-  querySnapshot.forEach((doc) => {
-  });
+  querySnapshot.forEach((doc) => {});
   data = data.filter((e) => e[0].formId === formId && e[0].adminId === adminId);
   return data;
 };
@@ -72,41 +71,47 @@ export const getIndividualStatisticalData = (formData) => {
   let totalQuestions = 0;
   let finalData = [];
   let userName;
-   Object.entries(formData).map((user) => {
-      let correctAns=0;
-      let totalUserMarks=0;
-      let totalAttempted=0,totalCorrect=0, totalIncorrect=0,totalQuestions=0,totalMarks=0;
-      Object.entries(user[1]).map((question) => {
-          userName=question[1].userName
-          let ansCorrect=0
-          let isAttempted=0,isIncorrect=0
-          Object.entries(question[1].options).map((option) => {
-                if(option[1].isMarked===true)
-                {
-                  isAttempted=1
-                }
-                if(option[1].isCorrect===true && option[1].isMarked===false)
-                {
-                  isIncorrect=1
-                }
-                if(option[1].isCorrect===false && option[1].isMarked===true)
-                {
-                  isIncorrect=1
-                }
-          });
-            totalQuestions+=parseInt(question[1].positiveMarks)
-          if(isIncorrect===0)
-          {
-            totalMarks+=parseInt(question[1].positiveMarks)
-            totalIncorrect++
-          }
-          else
-          {
-            totalMarks+=parseInt(question[1].negativeMarks)
-            totalCorrect++
-          }
+  Object.entries(formData).map((user) => {
+    let correctAns = 0;
+    let totalUserMarks = 0;
+    let totalAttempted = 0,
+      totalCorrect = 0,
+      totalIncorrect = 0,
+      totalQuestions = 0,
+      totalMarks = 0;
+    Object.entries(user[1]).map((question) => {
+      userName = question[1].userName;
+      let ansCorrect = 0;
+      let isAttempted = 0,
+        isIncorrect = 0;
+      Object.entries(question[1].options).map((option) => {
+        if (option[1].isMarked === true) {
+          isAttempted = 1;
+        }
+        if (option[1].isCorrect === true && option[1].isMarked === false) {
+          isIncorrect = 1;
+        }
+        if (option[1].isCorrect === false && option[1].isMarked === true) {
+          isIncorrect = 1;
+        }
+      });
+      totalQuestions += parseInt(question[1].positiveMarks);
+      if (isIncorrect === 0) {
+        totalMarks += parseInt(question[1].positiveMarks);
+        totalIncorrect++;
+      } else {
+        totalMarks += parseInt(question[1].negativeMarks);
+        totalCorrect++;
+      }
     });
-    finalData.push({ "username": userName, "totalQuestions": totalQuestions, "totalAttempted": totalAttempted, "totalMarks": totalMarks, "correctAns": totalCorrect, "wrongAns": totalIncorrect });
+    finalData.push({
+      username: userName,
+      totalQuestions: totalQuestions,
+      totalAttempted: totalAttempted,
+      totalMarks: totalMarks,
+      correctAns: totalCorrect,
+      wrongAns: totalIncorrect,
+    });
   });
   return finalData;
 };
@@ -125,17 +130,17 @@ export const getAllStatisticalData = async (formData) => {
     80: 0,
     90: 0,
     100: 0,
-    110: 0
+    110: 0,
   };
   Object.entries(allUserData).map((user) => {
-    let totalQuestions=user[1].totalQuestions
-    let correctMarks=user[1].totalMarks        
-    if(correctMarks<0)
-    {
-      allRanges[0]++
-    }else{
-    let relativeMarks=(parseInt(((correctMarks*100)/totalQuestions)/10)*10)
-    allRanges[relativeMarks]++
+    let totalQuestions = user[1].totalQuestions;
+    let correctMarks = user[1].totalMarks;
+    if (correctMarks < 0) {
+      allRanges[0]++;
+    } else {
+      let relativeMarks =
+        parseInt((correctMarks * 100) / totalQuestions / 10) * 10;
+      allRanges[relativeMarks]++;
     }
   });
   return allRanges;
@@ -150,4 +155,4 @@ export const checkFormExistence = async (formId, adminId) => {
   } else {
     return false;
   }
-}
+};
