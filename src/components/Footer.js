@@ -13,7 +13,7 @@ function Footer(){
             </div>
             <div className="displayflexrow">
                 <p className="title">Find us on:</p>
-                <div> <a href="https://github.com/" className="li">Github</a></div>
+                <div> <a href="https://github.com/manishsencha/tally-codebrewers" className="li">Github</a></div>
 
             </div>
         </div>

@@ -20,10 +20,12 @@ body {
 a {
   text-decoration: none;
 }
+.fontsizetwo{
+  font-size:1em;
 
+}
 .btn {
   margin: 20px;
-  /* margin-top:160px; */
   border: none;
   outline: none;
   padding: 1em 2em;
@@ -205,13 +207,31 @@ label{
 }
 
 .form {
-  /* align-items: center; */
+  display:flex;
+  justify-content: flex-end;
+  flex-direction: column;
+
   margin: 2em 0;
+}
+
+.flexcenter{
+  display:flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 2em 2rem;
+  width:50em;
+}
+.formCenter{
+  margin:0em 23em;
+}
+.dashboard{
+  position:relative;
+  bottom:3em;
+
 }
 
 .grey-container {
   padding: 2em;
-  background-color: rgba(0, 0, 0, 0.05);
 }
 .add-field-container p {
   font-size: 1.2em;
@@ -237,7 +257,6 @@ label{
 .input textarea {
   outline: none;
   width: 100%;
-  max-width: 350px;
   padding: 10px;
   border-radius: 3px;
   border: 2px solid #000;

@@ -4,24 +4,24 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <div>
-      <div className="section">
+      <div className="section dashboard">
         <center>
           <div className="content">
             <div>
               <h1 style={{color:"white",marginBottom:"1em"}}>
-                Hey,<span> Wizards</span> in the house!!!
+                Hey!<span> Wizards</span> in the house,
               </h1>
-              <h1 style={{color:"white",marginBottom:"2em"}}>
-                Create and Participate in <span>Quizzes</span>!!!
+              <h1 style={{color:"white",marginBottom:"1em"}}>
+                Let's create some <span>Quizzes</span> !!!
               </h1>
             </div>
             <center>
               <Link to="/login" className="btn">
                 Create A Quiz
               </Link>
-              <Link to="/participate" className="btn">
+              {/* <Link to="/participate" className="btn">
                 Participate in A Quiz
-              </Link>
+              </Link> */}
             </center>
           </div>
         </center>

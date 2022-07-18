@@ -66,24 +66,25 @@ function Create() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <h1 className="heading" style={{ color: "white", letterSpacing: "0.1em", fontWeight: "normal", margin: "2em 0" }}>Create new form</h1>
+      <h1 className="heading" style={{ color: "white", letterSpacing: "0.1em", fontWeight: "normal", margin: "2em 0" }}>Create new Quiz</h1>
 
-      <div className="form">
-        <div className="input">
-          <label style={{ marginBottom: "0 !important" }}>Title of the form</label>
-          <input
-            style={{ margin: "0" }}
-            type="text"
-            placeholder="Enter title"
-            onChange={(e) =>
-              updateObjState(setFormModel, formModel, "title", e.target.value)
-            }
-          />
-        </div>
+      <center className="formCenter">
+        <div className="form">
+          <div className="input">
+            <label style={{ marginBottom: "0 !important" }}>Title of the Quiz</label>
+            <input
+              style={{ margin: "0" }}
+              type="text"
+              placeholder="Enter title"
+              onChange={(e) =>
+                updateObjState(setFormModel, formModel, "title", e.target.value)
+              }
+              />
+          </div>
 
         {formModel.questions.length > 0 && (
           <RenderPlainForm model={formModel} />
-        )}
+          )}
 
         <div className="input">
           <label>End message</label>
@@ -99,7 +100,7 @@ function Create() {
               )
             }
           />
-        </div>
+          </div>
 
         <div className="input">
           <label>Validity(Optonal)</label>
@@ -119,39 +120,39 @@ function Create() {
                 e.target.value
               )
             }
-          />
+            />
         </div>
       </div>
+        </center>
+        <center>
+        <div class="flexcenter">
+            <div className="add-field-container grey-container">
+              <button className="btn fontsizetwo" onClick={() => openAddModal("moma")}>
+                Add Question
+              </button>
+            </div>
 
-      <div className="add-field-container grey-container">
-        <button
-          className="btn"
-          onClick={() => openAddModal("moma")}
-        >
-          Add Question
-        </button>
+            {showAddModal && (
+              <AddFieldModal
+                inputType={inputType}
+                close={() => setShowAddModal(false)}
+                add={addFieldToFormModel}
+              />
+            )}
+              {err && <p className="err text-right mb-1">{err}</p>}
+              <div className="add-field-container grey-container">
+                <button className="btn fontsizetwo" onClick={createForm}>
+                  {loading ? (
+                    <span className="spinner white"></span>
+                  ) : (
+                    <span>Create quiz</span>
+                  )}
+                </button>
+              </div>
+        </div>
+        </center>
       </div>
 
-      {showAddModal && (
-        <AddFieldModal
-          inputType={inputType}
-          close={() => setShowAddModal(false)}
-          add={addFieldToFormModel}
-        />
-      )}
-
-      <p>
-        {err && <p className="err text-right mb-1">{err}</p>}
-        <button className="btn" style={{ marginTop: "1em" }} onClick={createForm}>
-          {loading ? (
-            <span className="spinner white"></span>
-          ) : (
-            <span>create form</span>
-          )}
-        </button>
-      </p>
-
-    </div>
   );
 }
 
