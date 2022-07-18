@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import AddFieldModal from "../../components/AddFieldModal";
+import AddFieldModal from "../../components/addFieldModal";
 import RenderPlainForm from "../../components/RenderPlainForm";
 import { useAuth } from "../../context/AuthContext";
 

@@ -10,8 +10,8 @@ import {
 
 import { submitForm ,checkFormExistence} from "../utils/formAsyncFunctions";
 
-import MultiOptionField from "./MultiOptionField";
-import FileField from "./FileField";
+import MultiOptionField from "./multiOptionField";
+import FileField from "./fileField";
 import { TryOutlined } from "@mui/icons-material";
 
 function RenderReactiveForm({  model, onSubmitted }) {
@@ -65,9 +65,9 @@ function RenderReactiveForm({  model, onSubmitted }) {
       setExists(false)
      }
   };
-   
+
   return (
-    
+
       exists===true? <div
       className="main-form mt-1"
       style={{ width: "50%", paddingLeft: "2em" }}
@@ -171,7 +171,7 @@ function RenderReactiveForm({  model, onSubmitted }) {
         )}
       </button>
     </div>: <div>doesnt exist</div>
-    
+
   );
 }
 

@@ -12,7 +12,7 @@ import FreeRoute from "./utils/FreeRoute";
 import PrivateRoute from "./utils/PrivateRoute";
 import Footer from "./components/Footer";
 import Create from "./pages/admin/create";
-import Fill from "./pages/admin/Fill";
+import Fill from "./pages/admin/fill";
 function App() {
   return (
     <div style={{paddingBottom:"14em",backgroundColor:"#272727"}}>

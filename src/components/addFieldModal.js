@@ -1,6 +1,6 @@
 import React from "react";
-import AddMultiOptionField from "./AddMultiOptionField";
-import AddFileField from "./AddFileField";
+import AddMultiOptionField from "./addMultiOptionField";
+import AddFileField from "./addFileField";
 
 function AddFieldModal({ inputType, add, close }) {
   return (
