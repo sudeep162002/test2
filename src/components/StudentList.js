@@ -1,6 +1,7 @@
 import React from "react";
 
 function StudentList(props) {
+  console.log(props);
   return (
     <table style={{ height: 350, overflowY: "scroll" }}>
       <thead>

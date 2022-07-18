@@ -62,12 +62,14 @@ export const getFormData = async (formId, adminId) => {
   const q = query(collection(firestore, "submissions"));
   const querySnapshot = await getDocs(q);
   let data = [];
-  querySnapshot.forEach((doc) => {});
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
   data = data.filter((e) => e[0].formId === formId && e[0].adminId === adminId);
   return data;
 };
 
-export const getIndividualStatisticalData = (formData) => {
+export const getIndividualStatisticalData = async (formData) => {
   let totalQuestions = 0;
   let finalData = [];
   let userName;
