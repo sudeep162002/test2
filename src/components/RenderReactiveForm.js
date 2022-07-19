@@ -8,30 +8,26 @@ import {
   hasError,
 } from "../utils";
 
-import { submitForm ,checkFormExistence} from "../utils/formAsyncFunctions";
+import { submitForm, checkFormExistence } from "../utils/formAsyncFunctions";
 
-import MultiOptionField from "./multiOptionField";
-import FileField from "./fileField";
-import { TryOutlined } from "@mui/icons-material";
+import MultiOptionField from "./MultiOptionField";
+import FileField from "./FileField";
 
-function RenderReactiveForm({  model, onSubmitted }) {
+function RenderReactiveForm({ model, onSubmitted }) {
   const [userName, setUserName] = useState("");
   const [fillableModel, setFillableModel] = useState(
     createFillableModel(model)
   );
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
- const [exists,setExists]=useState(true)
+  const [exists, setExists] = useState(true);
 
-
- useEffect(() => {
-  let x= checkFormExistence(model.formId,model.adminId);
-  if(x===true){
-    setExists(true)
-  }
-
-}, [model]);
-
+  useEffect(() => {
+    let x = checkFormExistence(model.formId, model.adminId);
+    if (x === true) {
+      setExists(true);
+    }
+  }, [model]);
 
   const handleNameChange = (e) => {
     setUserName(e.target.value);
@@ -52,7 +48,8 @@ function RenderReactiveForm({  model, onSubmitted }) {
       model.adminId,
       model.formId
     );
-     if(checkFormExistence(model.formId,model.adminId)===true){
+    if (checkFormExistence(model.formId, model.adminId)) {
+      setExists(true);
       try {
         await submitForm(submitableModel, model.adminId, model.formId);
         setLoading(false);
@@ -61,14 +58,13 @@ function RenderReactiveForm({  model, onSubmitted }) {
         setErr(e.message);
         setLoading(false);
       }
-     }else{
-      setExists(false)
-     }
+    } else {
+      setExists(false);
+    }
   };
 
-  return (
-
-      exists===true? <div
+  return exists === true ? (
+    <div
       className="main-form mt-1"
       style={{ width: "50%", paddingLeft: "2em" }}
     >
@@ -170,8 +166,9 @@ function RenderReactiveForm({  model, onSubmitted }) {
           <span>submit</span>
         )}
       </button>
-    </div>: <div>doesnt exist</div>
-
+    </div>
+  ) : (
+    <div>doesnt exist</div>
   );
 }
 

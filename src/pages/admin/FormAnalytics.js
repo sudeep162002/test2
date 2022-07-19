@@ -27,6 +27,7 @@ function FormAnalytics() {
       try {
         setLoading(true);
         let formData = await getFormData(formId, currentUser.uid);
+        console.log("FORM DATA", formData);
         const aData = await getAllStatisticalData(formData);
         const iData = await getIndividualStatisticalData(formData);
         setIndividualStasticalData(iData);
