@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 function StudentChart(props) {
-  function getData(studentName) {
-    const a = props.data.find((d) => d.username === studentName);
-    let values = [a.totalQuestions, a.totalMarks, a.correctAns, a.wrongAns];
-    return values;
-  }
+  const [data, setData] = useState([...Array(4)].map((e) => 0));
+  useEffect(() => {
+    function getData(studentName) {
+      const a = props.data.find((d) => d.username === studentName);
+      const values = [a.totalQuestions, a.totalMarks, a.correctAns, a.wrongAns];
+      // return values;
 
-  const [series] = useState([
-    {
-      name: "Students",
-      data: getData(props.studentName),
-    },
-  ]);
+      setData(values);
+      // setData(values);
+    }
+    getData(props.studentName);
+  }, [props]);
 
   const [options] = useState({
     chart: {
@@ -95,14 +95,21 @@ function StudentChart(props) {
     },
   });
   return (
-    <div style={{ backgroundColor: "white" }}>
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="bar"
-        height={350}
-        width={600}
-      />
+    <div>
+      <>
+        <ReactApexChart
+          options={options}
+          series={[
+            {
+              name: "Students",
+              data: data,
+            },
+          ]}
+          type="bar"
+          height={350}
+          width={600}
+        />
+      </>
     </div>
   );
 }
