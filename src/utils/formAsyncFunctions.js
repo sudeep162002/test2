@@ -69,7 +69,7 @@ export const getFormData = async (formId, adminId) => {
   return data;
 };
 
-export const getIndividualStatisticalData = async (formData) => {
+export const getIndividualStatisticalData =  (formData) => {
   let totalQuestions = 0;
   let finalData = [];
   let userName;
@@ -118,8 +118,9 @@ export const getIndividualStatisticalData = async (formData) => {
   return finalData;
 };
 
-export const getAllStatisticalData = async (formData) => {
+export const getAllStatisticalData = (formData) => {
   let allUserData = getIndividualStatisticalData(formData);
+  console.log("Manish rocks",allUserData);
   let allRanges = {
     0: 0,
     10: 0,
