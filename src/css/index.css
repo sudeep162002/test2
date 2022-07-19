@@ -20,10 +20,6 @@ body {
 a {
   text-decoration: none;
 }
-.fontsizetwo{
-  font-size:1em;
-
-}
 .btn {
   margin: 20px;
   border: none;
@@ -231,7 +227,8 @@ label{
 }
 
 .grey-container {
-  padding: 2em;
+  padding: 1em;
+  padding-top:0em;
 }
 .add-field-container p {
   font-size: 1.2em;
@@ -510,7 +507,7 @@ label {
   letter-spacing: 1px;
   word-spacing: 1px;
   text-align: left !important;
-  font-size: 1.3em !important;
+  font-size: 1.1em !important;
   margin-bottom: 0.5em !important;
   color: white;
 }

@@ -65,13 +65,25 @@ function Create() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <h1 className="heading" style={{ color: "white", letterSpacing: "0.1em", fontWeight: "normal", margin: "2em 0" }}>Create new Quiz</h1>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
+        <h1
+          className="heading"
+          style={{
+            color: "white",
+            letterSpacing: "0.1em",
+            fontWeight: "normal",
+            margin: "0.5em 0",
+          }}
+        >
+          Create Quiz
+        </h1>
 
-      <center className="formCenter">
-        <div className="form">
+        <div className="form" style={{paddingLeft:"1em"}}>
           <div className="input">
-            <label style={{ marginBottom: "0 !important" }}>Title of the Quiz</label>
+            <label style={{ marginBottom: "0 !important" }}>
+              Quiz Name
+            </label>
             <input
               style={{ margin: "0" }}
               type="text"
@@ -79,80 +91,81 @@ function Create() {
               onChange={(e) =>
                 updateObjState(setFormModel, formModel, "title", e.target.value)
               }
-              />
-          </div>
-
-        {formModel.questions.length > 0 && (
-          <RenderPlainForm model={formModel} />
-          )}
-
-        <div className="input">
-          <label>End message</label>
-          <input
-            type="text"
-            placeholder="What should user see after submitting the form"
-            onChange={(e) =>
-              updateObjState(
-                setFormModel,
-                formModel,
-                "endMessage",
-                e.target.value
-              )
-            }
-          />
-          </div>
-
-        <div className="input">
-          <label>Validity(Optonal)</label>
-          <input
-            type="number"
-            placeholder="For how many hours the form should be fillable"
-            onKeyDown={(e) => {
-              if (e.key === "." || e.key === "-") {
-                e.preventDefault();
-              }
-            }}
-            onChange={(e) =>
-              updateObjState(
-                setFormModel,
-                formModel,
-                "expiration",
-                e.target.value
-              )
-            }
             />
-        </div>
-      </div>
-        </center>
-        <center>
-        <div class="flexcenter">
-            <div className="add-field-container grey-container">
-              <button className="btn fontsizetwo" onClick={() => openAddModal("moma")}>
-                Add Question
-              </button>
-            </div>
+          </div>
 
-            {showAddModal && (
-              <AddFieldModal
-                inputType={inputType}
-                close={() => setShowAddModal(false)}
-                add={addFieldToFormModel}
-              />
-            )}
-              {err && <p className="err text-right mb-1">{err}</p>}
-              <div className="add-field-container grey-container">
-                <button className="btn fontsizetwo" onClick={createForm}>
-                  {loading ? (
-                    <span className="spinner white"></span>
-                  ) : (
-                    <span>Create quiz</span>
-                  )}
-                </button>
-              </div>
-        </div>
-        </center>
-      </div>
+          <div className="input">
+            <label>End message</label>
+            <input
+              type="text"
+              placeholder="What should user see after submitting the form"
+              onChange={(e) =>
+                updateObjState(
+                  setFormModel,
+                  formModel,
+                  "endMessage",
+                  e.target.value
+                )
+              }
+            />
+          </div>
 
+          <div className="input">
+            <label>Validity(Optional)</label>
+            <input
+              type="number"
+              placeholder="For how many hours the form should be fillable"
+              onKeyDown={(e) => {
+                if (e.key === "." || e.key === "-") {
+                  e.preventDefault();
+                }
+              }}
+              onChange={(e) =>
+                updateObjState(
+                  setFormModel,
+                  formModel,
+                  "expiration",
+                  e.target.value
+                )
+              }
+            />
+          </div>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-around", paddingLeft:"1em" }}>
+          <div className="add-field-container grey-container">
+            <button
+              className="btn"
+              onClick={() => openAddModal("moma")}
+            >
+              Add Question
+            </button>
+          </div>
+
+          {err && <p className="err text-right mb-1">{err}</p>}
+          <div className="add-field-container grey-container">
+            <button className="btn fontsizetwo" onClick={createForm}>
+              {loading ? (
+                <span className="spinner white"></span>
+              ) : (
+                <span>Create quiz</span>
+              )}
+            </button>
+          </div>
+        </div>
+        {showAddModal && (
+          <AddFieldModal
+            inputType={inputType}
+            close={() => setShowAddModal(false)}
+            add={addFieldToFormModel}
+          />
+        )}
+      </div>
+      {formModel.questions.length > 0 && (
+        <div style={{ width: "65%", height: "70%", overflowY: "hidden" }}>
+          <RenderPlainForm model={formModel} />
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -5,7 +5,7 @@ function RenderPlainForm({ model }) {
     <div className="grey-container mb-1" style={{ borderRadius: "5px" }}>
       <h1
         className="mb-1"
-        style={{ color: "white", fontWeight: "200", letterSpacing: "1px" }}
+        style={{ color: "white", fontWeight: "200", letterSpacing: "1px",paddingTop:"1em" }}
       >
         PREVIEW
       </h1>
@@ -37,7 +37,7 @@ function RenderPlainForm({ model }) {
           ))}
         </div>
       ))}
-      <button className="btn mt-1">submit</button>
+      {/* <button className="btn mt-1">submit</button> */}
     </div>
   );
 }
